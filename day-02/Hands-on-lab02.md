@@ -35,18 +35,29 @@ Once created you can click on save to use the new compute target.
 
 ### Task 2 - Import and prepare the data
 
-After creating the pipeline draft using the designer, you’ll need some data to train the model. For this lab you will use the credit card dataset via a web URL. Using this dataset you will train a model for fraud detection based on best correlated features.
+After creating the pipeline draft using the Designer, you’ll need some data to train the model. For this lab you will use the credit card dataset via a web URL. Using this dataset you will train a model for fraud detection based on best correlated features.
 Using the web URL, you will load data from a csv file containing both training features and labels.
 
 Start by importing and preparing the dataset for the training following the steps underneath:
 
-* Go to the Designer asset library
+* Go to the Designer's asset library
 * Choose **Data Input and Output**
 * Hover on **Import Data** and click on **Use module**
-* On the module Settings menu select **URL via HTTP** data source
-* Copy the following link `https://automlsamplenotebookdata.blob.core.windows.net/automl-sample-notebook-data/creditcard.csv` and past it to the **Data source URL** box
 
 ![Import data](media/Lab02-import-data.png)
+
+* On the module Settings menu select **Datastore** for data source
+* click on **New datastore**
+* On the prompt window enter `sample_datastore` for **Datastore name**
+* Select **enter manually**
+* Copy the following link `https://automlsamplenotebookdata.blob.core.windows.net/automl-sample-notebook-data/` and past it to the **URL** box
+* select `No` for **Save credentials with the datastore for data access**
+
+![create new datastore](media/Lab02-new-datastore.png)
+
+* Enter `creditcard.csv` in the Path field and make sure Validated is *checked*
+
+![Validated Import data](media/Lab02-validated-data-import.png)
 
 * From the Designer library choose **Data transformation** 
 * Grab and drop **Clean Missing Data** module to the draft, connect the **Import Data** module to this one
@@ -134,15 +145,47 @@ After creating the pipeline draft using the AML Designer, here you are going to 
 
 ### Task 1 - Set pipeline parameters
 
+Pipeline parameters are used to build versatile pipelines which can be resubmitted later with varying parameter values. Here in this exercise, you are going to set these parameters:
+
+* **Data source** or the training data path, to retrain the model on different datasets
+  * Select **Import Data** module and under **Parameters** tab, mouseover the Path field TO select the *More button*, then click on **Add to pipeline parameter** and save
+
+  ![Add data path to pipeline parameter](media/Lab02-DP-to-PP.png)
+
+* **Fraction of rows** in the training dataset
+  * Select **Split Data** module and add **Fraction of rows in the first output** to pipeline parameters, then save
+
+  ![Add fraction of rows to pipeline parameter](media/Lab02-splitData-PP.png)
+
+* **Number of desired features** to select for training
+  * Select **Filter Based Feature Selection**, add **Number of desired features** to pipeline parameters and save
+
+  ![Number of selected features to pipeline parameter](media/Lab02-feature-selection-PP.png)
+
+* **Number of decision trees** of the **Decision Forest** training algorithm
+  * Select **Two-class Decision Forest**, add **Number of decision trees** to pipeline parameters and save
+
+  ![Number of decision trees to pipeline parameter](media/Lab02-Num-DT-PP.png)
+
 ### Task 2 - Create a REST endpoint to publish the ML pipeline
 
+After setting the pipeline parameters, now you are ready to **publish** the pipeline
+* Click on the **Publish** button right on top  
+* Select **Create new** to create a new **PipelineEndpoint**
+* Enter `Two-class pipeline` to name the **PipelineEndpoint**
+* Click Publish
+
+![Publish pipeline to a REST Endpoint](media/Lab02-publish-pipeline.png)
 
 ## Exercise 3 - Test ML pipeline Rest endpoint
 
+Publishing the pipeline enables a REST endpoint to rerun the pipeline from any HTTP library on any platform. Here you are going to test the Machine Learning pipeline Endpoint that you created.
+
 ### task1 - Submit a pipeline run using the REST endpoint
 
+After publish is succeeded go to the pipeline endpoint by clicking on `Two-class pipeline`
 
-## Exercise 4 - Version endpoints
+![Publish pipeline to a REST Endpoint](media/Lab02-go-to-pipeline-endpoint.png)
 
 
 
