@@ -56,7 +56,7 @@ In this task, you import Jupyter notebooks from GitHub that you will use to comp
 
 ## Task 3 - Open Notebook for this lab
 
-1. From within Jupyter Notebooks interface navigate to ml-labs->....
+1. From within Jupyter Notebooks interface navigate to `ml-labs/azure-ml-data-science-400/day-01/notebooks`.
 
 1. Open `Lab01 - Training and deploying a model in AML`. This is the Python notebook you will step through executing in this lab.
 

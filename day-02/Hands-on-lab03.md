@@ -54,7 +54,7 @@ In this task, you import Jupyter notebooks from GitHub that you will use to comp
 
 ## Task 3 - Open Notebook for this lab
 
-1. From within Jupyter Notebooks interface navigate to ml-labs->....
+1. From within Jupyter Notebooks interface navigate to `ml-labs/azure-ml-data-science-400/day-02/notebooks`.
 
 1. Open `Lab03 - Implementing and monitoring a batch scoring solution`. This is the Python notebook you will step through executing in this lab.
 
