@@ -1,4 +1,4 @@
-# Setup the Lab 06 Workspace
+# Setup the Lab 07 Workspace
 
 ## Task 1 - Configure the Azure DevOps project and required Variable group
 
@@ -78,9 +78,9 @@ Create a new service connection to your Azure ML Workspace to enable executing t
 1. Go to the [GitHub portal](https://github.com/) and sign in with the Git credentials provided for you.
 2. You will be asked to verify your account, so you should open your user's mailbox in [the Outlook web client](https://outlook.office365.com/) to be able to receive the verification codes for GitHub authentication. Use the same GitHub user account credentials to open Outlook.
 
-3. In GitHub, while authenticated with the lab user, navigate to the following link to create a new git repository from [the provided template](https://github.com/solliancenet/azure-ml-data-science-400-lab06-starter/generate).
+3. In GitHub, while authenticated with the lab user, navigate to the following link to create a new git repository from [the provided template](https://github.com/solliancenet/azure-ml-data-science-400-lab07-starter/generate).
 
-4. Set the repository name to `azure-ml-data-science-400-lab06` and select **Create repository from template**.
+4. Set the repository name to `azure-ml-data-science-400-lab07` and select **Create repository from template**.
 
     ![Generate git repository from template](../../day-03/media/02%20-%20github-%20generaterepo.png)
 
@@ -107,11 +107,11 @@ In the following steps you will create and run a new build pipeline based on the
 
     ![Authorize Azure Pipelines access to GitHub](../../day-03/media/01-github-authorizeaccess.png)
 
-5. Redirected back to Azure Devops, select the available Git repository, the one you generated during the previous task in this lab: `github-clouduser-XXXX/azure-ml-data-science-400-lab06`.
+5. Redirected back to Azure Devops, select the available Git repository, the one you generated during the previous task in this lab: `github-clouduser-XXXX/azure-ml-data-science-400-lab07`.
 
     ![Select repository name](../../day-03/media/015-selectgitrepository.png)
 
-6. After you authorized the access for Azure Pipelines, you'll be asked to approve and install Azure Pipelines on your personal GitHub account. Select the `azure-ml-data-science-400-lab06` repository and select **Approve & Install**.
+6. After you authorized the access for Azure Pipelines, you'll be asked to approve and install Azure Pipelines on your personal GitHub account. Select the `azure-ml-data-science-400-lab07` repository and select **Approve & Install**.
 
     ![Approve and install Azure Pipelines on GitHub](../../day-03/media/01-github-approveinstall.png)
 
@@ -157,7 +157,7 @@ In the following steps you will create and run a new build pipeline based on the
 
     ![Connect to repository](../../day-03/media/014-createpipeline.png)
 
-4. Select the Git repository you already used for the first pipeline: `github-clouduser-XXXX/azure-ml-data-science-400-lab06`.
+4. Select the Git repository you already used for the first pipeline: `github-clouduser-XXXX/azure-ml-data-science-400-lab07`.
 
     ![Select repository name](../../day-03/media/015-selectgitrepository.png)
 
@@ -291,7 +291,7 @@ In the following steps you will create and run a new build pipeline based on the
     Write-Host "PowerShell Blob trigger function Processed blob! Name: $($InputBlob.Path) Size: $($InputBlob.Length) bytes"
 
     $gitHubUser = "github-cloudlabsuser-1020"
-    $gitHubRepo = "azure-ml-data-science-400-lab06"
+    $gitHubRepo = "azure-ml-data-science-400-lab07"
     $uri = "https://api.github.com/repos/$($gitHubUser)/$($gitHubRepo)/dispatches"
     $headers = @{ Authorization="Bearer $($env:GH_PAT)" }
     $body = "{ ""event_type"": ""storage-blobupdated"" }"
