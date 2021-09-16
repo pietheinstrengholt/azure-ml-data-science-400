@@ -181,7 +181,7 @@ After setting the pipeline parameters, now you are ready to **publish** the pipe
 
 Publishing the pipeline enables a REST endpoint to rerun the pipeline from any HTTP library on any platform. Here you are going to test the Machine Learning pipeline Endpoint that you created.
 
-### task1 - Submit a pipeline run using the REST endpoint
+### task1 - Submit a pipeline run from AML Studio
 
 After publish is succeeded go to the pipeline endpoint by clicking on `Two-class pipeline`
 
@@ -191,20 +191,27 @@ Here on the **published pipeline overview** you can find the pipeline REST endpo
 
 You can test the pipeline directly from this page, just by clicking on **Submit** to submit a new run using new parameter values that you can define in the bottom of the prompt as follows. 
 
-![Submit new run from published pipeline](media/Lab02-submit-new-run-usin-published-pipeline.png)
+![Submit new run from published pipeline](media/Lab02-submit-new-run-using-published-pipeline.png)
 
+### task2 - Submit a pipeline run using the REST endpoint
 To submit a new training using the pipeline REST endpoint follow these next steps:
 * Get the **REST URL** from the endpoint property of the published pipeline object
 
-![Get REST url](media/Lab02-submit-new-run-usin-published-pipeline.png)
+![Get REST url](media/Lab02-get-rest-endpoint.png)
 
 * Go to [Azure portal](https://portal.azure.com/) and open a **Bash cloud shell** 
 
 * First you need to get your Bearer access token using this command 
-```declare token=$(echo $(az account get-access-token) | jq ".accessToken" -r)```
+
+```
+declare token=$(echo $(az account get-access-token) | jq ".accessToken" -r)
+```
 
 * Make HTTP request using this command, make sure to replace `URL` with your pipeline **REST URL**. Notice here that you will request a submit with `8` best features and `10` decision trees
-```curl -X POST -H "Authorization: Bearer $token" -H "Content-Type:application/json" -H "Accept:application/json" URL -d '{"ParameterAssignments": {"Number of desired features":"8","Number of decision trees":"10"}}'```
+
+```
+curl -X POST -H "Authorization: Bearer $token" -H "Content-Type:application/json" -H "Accept:application/json" URL -d '{"ParameterAssignments": {"Number of desired features":"8","Number of decision trees":"10"}}'
+```
 
 ![Request submit pipeline using rest endpoint from CLI](media/Lab02-request-endpoint-from-CLI.png)
 
