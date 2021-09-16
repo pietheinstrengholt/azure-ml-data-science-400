@@ -187,8 +187,43 @@ After publish is succeeded go to the pipeline endpoint by clicking on `Two-class
 
 ![Publish pipeline to a REST Endpoint](media/Lab02-go-to-pipeline-endpoint.png)
 
+Here on the **published pipeline overview** you can find the pipeline REST endpoint properties for further use.
 
+You can test the pipeline directly from this page, just by clicking on **Submit** to submit a new run using new parameter values that you can define in the bottom of the prompt as follows. 
 
+![Submit new run from published pipeline](media/Lab02-submit-new-run-usin-published-pipeline.png)
+
+To submit a new training using the pipeline REST endpoint follow these next steps:
+* Get the **REST URL** from the endpoint property of the published pipeline object
+
+![Get REST url](media/Lab02-submit-new-run-usin-published-pipeline.png)
+
+* Go to [Azure portal](https://portal.azure.com/) and open a **Bash cloud shell** 
+
+* First you need to get your Bearer access token using this command 
+```declare token=$(echo $(az account get-access-token) | jq ".accessToken" -r)```
+
+* Make HTTP request using this command, make sure to replace `URL` with your pipeline **REST URL**. Notice here that you will request a submit with `8` best features and `10` decision trees
+```curl -X POST -H "Authorization: Bearer $token" -H "Content-Type:application/json" -H "Accept:application/json" URL -d '{"ParameterAssignments": {"Number of desired features":"8","Number of decision trees":"10"}}'```
+
+![Request submit pipeline using rest endpoint from CLI](media/Lab02-request-endpoint-from-CLI.png)
+
+Now you can go to **Experiments** in Azure Machine Learning to access your submit.
+
+* Select **All runs** 
+
+* Click on the last submitted run to access the pipeline run
+
+![check the request Run](media/Lab02-access-rest-run.png)
+
+* Notice the new parameters values on the **pipeline run overview** 
+
+![Pipeline run overview](media/Lab02-access-pipeline-submit.png)
+
+* Go to evaluate to see the new trained model's results
+
+![Evaluate new trained model results](media/Lab02-evaluate-results.png)
+ 
 
 ## Acknowledgements
 
