@@ -194,6 +194,7 @@ You can test the pipeline directly from this page, just by clicking on **Submit*
 ![Submit new run from published pipeline](media/Lab02-submit-new-run-using-published-pipeline.png)
 
 ### task2 - Submit a pipeline run using the REST endpoint
+
 To submit a new training using the pipeline REST endpoint follow these next steps:
 * Get the **REST URL** from the endpoint property of the published pipeline object
 
