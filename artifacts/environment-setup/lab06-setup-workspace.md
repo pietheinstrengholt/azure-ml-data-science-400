@@ -20,14 +20,13 @@
 
 5. To prepare the values you'll need to set all your variables, you need to get the resource group location where all your Azure resources were provisioned. In another browser tab, navigate to the [Azure portal](https://portal.azure.com), sign in with the provided Azure credentials if you are asked to, and navigate to the lab Resource group. On the resource group overview page, you'll find the location information you need.
 
-    **TODO:  update image**
     ![Get Resource Group location information](../../day-03/media/04-getRGLocation.png)
 
     Also note the other two marked values in the image above (you'll also need those two on the next steps): the **Resource Group name** and the **Machine Learning Workspace name**, which are also provided for you in the lab Environment Details page.
 
 6. Going back to the Azure Devops portal where you created the Variable group for you DevOps project, enter the **Variable group name**: `devopsforai-aml-vg`.
 
-7. Add the required list of variables, using the **+ Add** link at the bottom of the **Variables** section as illustrated in the image bellow:
+7. Add the required list of variables, using the **+ Add** link at the bottom of the **Variables** section as illustrated in the image below:
 
     **TODO:  update image**
     ![Configure required variable values in the variable group](../../day-03/media/04-devops-edit-vargroup.png)
@@ -36,15 +35,15 @@
 
     | Variable Name            | Suggested Value           | Short description                                                                                                           |
     | ------------------------ | ------------------------- | --------------------------------------------------------------------------------------------------------------------------- |
-    | BASE_NAME                | [your project name] e.g. `odluserXXXXXX-project`     | Unique naming prefix for created resources - max 10 chars, letters and numbers only                                         |
+    | BASE_NAME                | [your project name] e.g. `odluserXXXXXX-project`     | Unique naming prefix for created resources                                         |
     | LOCATION                 | `westus`                 | Resource group location (the value you looked for on the previous step)                             |
-    | RESOURCE_GROUP           | `aml-bootcamp-XXXXXX`                | Azure Resource Group name                                                                                                   |
-    | WORKSPACE_NAME           | `aml-bootcamp-XXXXXX`             | Azure Machine Learning Workspace name                                                                                                     |
+    | RESOURCE_GROUP           | `azure-ml-data-science-400-XXXXXX`                | Azure Resource Group name                                                                                                   |
+    | WORKSPACE_NAME           | `azure-ml-data-science-400-XXXXXX`             | Azure Machine Learning Workspace name                                                                                                     |
     | AZURE_RM_SVC_CONNECTION  | `azure-resource-connection` | Azure Resource Manager Service Connection name |
     | WORKSPACE_SVC_CONNECTION | `aml-workspace-connection`  | Azure ML Workspace Service Connection name                 |
     | ACI_DEPLOYMENT_NAME      | `mlops-aci`                 | [Azure Container Instances](https://azure.microsoft.com/en-us/services/container-instances/) name                           |                 |
 
-8. Make sure you select the **Allow access to all pipelines** checkbox in the variable group configuration.
+8. Make sure you select the **Open access** option in the **Pipeline permissions** menu for variable group configuration.
 
     ![Allow access to all pipelines](../../day-03/media/05-devops-allowacces-vargroup.png)
 
@@ -70,7 +69,6 @@ Create a new service connection to your Azure ML Workspace to enable executing t
 
 4. Select scope level: **Machine Learning Workspace** and select the available **Subscription**, **Resource group** and **Machine Learning Workspace** provided in the lab environment. Enter `aml-workspace-connection` for the **Service connection name** and select **Save**.
 
-    **TODO:  update image**
     ![AML Service Connection details](../../day-03/media/09-devops-newserviceconnection.png)
 
 > **Note:**  Creating a service connection with Azure Machine Learning workspace scope requires `Owner` or `User Access Administrator` permissions on the Workspace. You will need sufficient permissions to register an application with your Azure AD tenant, or you can get the ID and secret of a service principal from your Azure AD Administrator. That principal must have Contributor permissions on the Azure ML Workspace.
@@ -80,13 +78,10 @@ Create a new service connection to your Azure ML Workspace to enable executing t
 1. Go to the [GitHub portal](https://github.com/) and sign in with the Git credentials provided for you.
 2. You will be asked to verify your account, so you should open your user's mailbox in [the Outlook web client](https://outlook.office365.com/) to be able to receive the verification codes for GitHub authentication. Use the same GitHub user account credentials to open Outlook.
 
-3. In GitHub, while authenticated with the lab user, navigate to the following link to create a new git repository from [the provided template](https://github.com/solliancenet/aml-bootcamp-lab-06-starter/generate).
+3. In GitHub, while authenticated with the lab user, navigate to the following link to create a new git repository from [the provided template](https://github.com/solliancenet/azure-ml-data-science-400-lab06-starter/generate).
 
-    **TODO:  create repository.  Update the yml files**
+4. Set the repository name to `azure-ml-data-science-400-lab06` and select **Create repository from template**.
 
-4. Set the repository name to `aml-bootcamp-lab06` and select **Create repository from template**.
-
-    **TODO:  update image**
     ![Generate git repository from template](../../day-03/media/02%20-%20github-%20generaterepo.png)
 
 5. When the new repository is generated, copy your repository URL from the browser address bar since you will need it in the next steps.
@@ -112,14 +107,12 @@ In the following steps you will create and run a new build pipeline based on the
 
     ![Authorize Azure Pipelines access to GitHub](../../day-03/media/01-github-authorizeaccess.png)
 
-5. Redirected back to Azure Devops, select the available Git repository, the one you generated during the previous task in this lab: `github-clouduser-XXXX/aml-bootcamp-lab-06`.
+5. Redirected back to Azure Devops, select the available Git repository, the one you generated during the previous task in this lab: `github-clouduser-XXXX/azure-ml-data-science-400-lab06`.
 
-    **TODO:  update image**
     ![Select repository name](../../day-03/media/015-selectgitrepository.png)
 
-6. After you authorized the access for Azure Pipelines, you'll be asked to approve and install Azure Pipelines on your personal GitHub account. Select the `aml-bootcamp-lab06` repository and select **Approve & Install**.
+6. After you authorized the access for Azure Pipelines, you'll be asked to approve and install Azure Pipelines on your personal GitHub account. Select the `azure-ml-data-science-400-lab06` repository and select **Approve & Install**.
 
-    **TODO:  update image**
     ![Approve and install Azure Pipelines on GitHub](../../day-03/media/01-github-approveinstall.png)
 
 7. After approving installation, you might be asked to sign in again to Azure Devops, so you have to provide the Azure credentials provided in the lab environment. Next, in case you are asked, you will have to authorize Azure Pipelines permissions on your GitHub account. Select **Authorize Azure Pipelines** on this page.
@@ -164,9 +157,8 @@ In the following steps you will create and run a new build pipeline based on the
 
     ![Connect to repository](../../day-03/media/014-createpipeline.png)
 
-4. Select the Git repository you already used for the first pipeline: `github-clouduser-XXXX/aml-bootcamp-lab-02`.
+4. Select the Git repository you already used for the first pipeline: `github-clouduser-XXXX/azure-ml-data-science-400-lab06`.
 
-    **TODO:  update image**
     ![Select repository name](../../day-03/media/015-selectgitrepository.png)
 
 5. In the **Configure pipeline** step, select the **Existing Azure Pipelines YAML file**.
@@ -204,12 +196,12 @@ In the following steps you will create and run a new build pipeline based on the
     ```sh
     # Replace {sp_XXXXX_githubactions}, setting "XXXXX" to your unique lab code.  For example, if your lab code is 12345, use "sp_12345_githubactions" for the name.
     # Replace {subscription-id} with your subscription ID.
-    # Replace {aml-bootcamp-XXXXX} in the resource groups section with the name of your resource group.
-    # Replace {aml-bootcamp-XXXXX} in the workspaces section with the name of your Azure Machine Learning workspace.
+    # Replace {azure-ml-data-science-400-XXXXX} in the resource groups section with the name of your resource group.
+    # Replace {azure-ml-data-science-400-XXXXX} in the workspaces section with the name of your Azure Machine Learning workspace.
     
     az ad sp create-for-rbac --name http://{sp_XXXXX_githubactions} \
         --role contributor \
-        --scopes /subscriptions/{subscription-id}/resourceGroups/{aml-bootcamp-XXXXX}/providers/Microsoft.MachineLearningServices/workspaces/{aml-bootcamp-XXXXX} \
+        --scopes /subscriptions/{subscription-id}/resourceGroups/{azure-ml-data-science-400-XXXXX}/providers/Microsoft.MachineLearningServices/workspaces/{azure-ml-data-science-400-XXXXX} \
         --sdk-auth
     ```
 
@@ -299,7 +291,7 @@ In the following steps you will create and run a new build pipeline based on the
     Write-Host "PowerShell Blob trigger function Processed blob! Name: $($InputBlob.Path) Size: $($InputBlob.Length) bytes"
 
     $gitHubUser = "github-cloudlabsuser-1020"
-    $gitHubRepo = "aml-bootcamp-lab-06"
+    $gitHubRepo = "azure-ml-data-science-400-lab06"
     $uri = "https://api.github.com/repos/$($gitHubUser)/$($gitHubRepo)/dispatches"
     $headers = @{ Authorization="Bearer $($env:GH_PAT)" }
     $body = "{ ""event_type"": ""storage-blobupdated"" }"

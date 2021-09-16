@@ -44,7 +44,7 @@ Using GitHub and GitHub Actions, we will build an end-to-end Machine Learning pr
 
 7. You will be asked to verify your account, so you should open your user's mailbox on https://outlook.office365.com/ to be able to receive the verification codes for GitHub authentication. Use the same GitHub user account credentials to open Outlook.
 
-8. In GitHub, you will see the `aml-bootcamp-lab06` repository that was pre-generated under your GitHub account.
+8. In GitHub, you will see the `azure-ml-data-science-400-lab06` repository that was pre-generated under your GitHub account.
 
     **TODO:  update image**
     ![View the GitHub repository](./media/01-devops-labrepository.png)
@@ -91,14 +91,12 @@ Using GitHub and GitHub Actions, we will build an end-to-end Machine Learning pr
 
 18. Select **Launch studio** to navigate to the **Azure Machine Learning Studio**.
 
-19. In the [Azure Machine Learning Studio](https://ml.azure.com), select **Pipelines** from the left navigation menu, go to **Pipeline endpoints** and check the published training pipeline in the `aml-bootcamp-XXXXXX` workspace.
+19. In the [Azure Machine Learning Studio](https://ml.azure.com), select **Pipelines** from the left navigation menu, go to **Pipeline endpoints** and check the published training pipeline in the `aml-ds400-XXXXXX` workspace.
 
-    **TODO:  crop image to cut off right-hand side**
     ![Inspect published ML pipeline](./media/025-checktrainingpipeline.png)
 
 20. The build pipeline for training automatically triggers every time there's a change in the master branch. After the pipeline is finished, you'll see a new model in the ML Workspace. Navigate to the **Models** section in [ML Studio](https://ml.azure.com/), using the left navigation menu and check the  registered model named `COVID19Articles_model.pkl`.
 
-    **TODO:  crop image to cut off right-hand side**
      ![Check the registered model](./media/026-registeredmodel.png)
 
 ## Task 3 - Explore the execution of the existing  Azure DevOps release pipeline
@@ -131,7 +129,7 @@ The release deployment and batch scoring pipelines have the following behaviors:
 
     ![Deploy the last version of model to ACI](./media/032-deploytoACI.png)
 
-5. Select the **Smoke test**: The test sends a sample query to the scoring web service and verifies that it returns the expected response. Have a look at the smoke [test code](https://github.com/solliancenet/aml-bootcamp-lab-06-starter/blob/master/ml_service/util/smoke_test_scoring_service.py) for more details on the steps involved there.
+5. Select the **Smoke test**: The test sends a sample query to the scoring web service and verifies that it returns the expected response. Have a look at the smoke [test code](https://github.com/solliancenet/azure-ml-data-science-400-lab06-starter/blob/master/COVID19Articles/ml_service/util/smoke_test_scoring_service.py) for more details on the steps involved there.
 
     ![Smoke test execution](./media/033-smoketest.png)
 
@@ -191,7 +189,7 @@ We have created sample workflow file train_deploy.yml to train the model and dep
 
 1. Sign-in to [GitHub](https://github.com) with your GitHub account.
 
-2. Navigate to the already generated repository for this lab, named `aml-bootcamp-lab06`. If the repository is not automatically opened, please select it from the available repositories list.
+2. Navigate to the already generated repository for this lab, named `azure-ml-data-science-400-lab06`. If the repository is not automatically opened, please select it from the available repositories list.
 
     **TODO:  update image**
     ![Locate GitHub repository](./media/01-github-selectrepository.png).
@@ -272,7 +270,7 @@ In the Azure Portal, we prepared an Azure Function that triggers the above descr
 
     ![Overwrite COVID19Articles.csv file](./media/040-overwritefile.png)
 
-8. Open the GitHub portal, select the `aml-bootcamp-lab-06` repository and select **Actions** from the top menu bar. Notice how the data file update triggered your GitHub Actions workflow execution.
+8. Open the GitHub portal, select the `azure-ml-data-science-400-lab-06` repository and select **Actions** from the top menu bar. Notice how the data file update triggered your GitHub Actions workflow execution.
 
     **TODO:  update image**
     ![Blob updated triggered GitHub Actions](./media/040-githubtriggeredaction.png)

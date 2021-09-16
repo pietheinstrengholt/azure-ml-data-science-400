@@ -2,7 +2,14 @@
 
 ## Lab overview
 
-...
+Azure Machine Learning Batch scoring targets large inference jobs that are not time-sensitive. It is optimized for high-throughput, fire-and-forget inference over large collections of data.
+
+In this lab, we will be using [Azure Machine Learning Pipelines](https://docs.microsoft.com/en-us/azure/machine-learning/concept-ml-pipelines) to  run batch scoring task on a large data set, using a trained model. We will use the `NYC taxi fare predictor` model from Lab 01 to make batch predictions of taxi fares for customer based on a set of input features.  The AML pipeline would entail two steps:
+
+1. **Preprocess data step**: In this step we will simulate generation of a large dataset, approximately 250k rows of data. The data generated in this step is passed as an input to the next step.
+1. **Inference step**: In this step we will use a special type of step called `ParallelRunStep` to do batch scoring on the input data. The `ParallelRunStep` uses a configuration called `ParallelRunConfig` that allows you to control how to break up the scoring job in batches across the available compute nodes and their respective processors. 
+
+Finally, we will also review how to monitor the batch scoring pipeline runs from within Azure Machine Learning Studio.
 
 ## Task 1 - Create a Compute Instance
 
@@ -54,7 +61,7 @@ In this task, you import Jupyter notebooks from GitHub that you will use to comp
 
 ## Task 3 - Open Notebook for this lab
 
-1. From within Jupyter Notebooks interface navigate to ml-labs->....
+1. From within Jupyter Notebooks interface navigate to `ml-labs/azure-ml-data-science-400/day-02/notebooks`.
 
 1. Open `Lab03 - Implementing and monitoring a batch scoring solution`. This is the Python notebook you will step through executing in this lab.
 
