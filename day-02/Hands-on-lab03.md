@@ -8,7 +8,7 @@
 - [Lab Setup](#lab-setup)
    - [Task 1: Create a Compute Instance](#task-1-create-a-compute-instance)
    - [Task 2: Import the Lab Notebooks](#task-2-import-the-lab-notebooks)
-- [Exercise: Implementing and monitoring a Batch Scoring solution](#implementing-and-monitoring-a-batch-scoring-solution)
+- [Exercise: Implementing and monitoring a Batch Scoring solution](#exercise-implementing-and-monitoring-a-batch-scoring-solution)
    - [Task 1: Open Lab Notebook](#task-1-open-lab-notebook)
    - [Task 2: Execute Notebook](#task-2-execute-notebook)
 
