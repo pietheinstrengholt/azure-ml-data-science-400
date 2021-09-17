@@ -37,7 +37,6 @@ Using GitHub and GitHub Actions, we will build an end-to-end Machine Learning pr
 
 5. On the run results page, check the **Summary** section to understand how the pipeline is linked to GitHub. Right click on the repository name on the Repository and version column as illustrated bellow and choose to open it in a new tab.
 
-    **TODO:  update image**
     ![Open the GitHub repository](./media/01-devops-opengitrepository.png)
 
 6. You will be prompted to sign in with the Git credentials provided for you in the lab environment.
@@ -46,17 +45,14 @@ Using GitHub and GitHub Actions, we will build an end-to-end Machine Learning pr
 
 8. In GitHub, you will see the `azure-ml-data-science-400-lab07` repository that was pre-generated under your GitHub account.
 
-    **TODO:  update image**
     ![View the GitHub repository](./media/01-devops-labrepository.png)
 
 9. If the repository is not automatically opened, select it from the available repositories list.
 
-    **TODO:  update image**
     ![Locate the GitHub repository](./media/01-github-selectrepository.png)
 
-10. Spend a few moments to browse the repository structure. Focus on the `.pipelines` folder which contains the YAML  scripts used by the Azure DevOps pipelines discussed later in this exercise.
+10. Spend a few moments to browse the repository structure. Focus on the `.pipelines` folder which contains the YAML scripts used by the Azure DevOps pipelines discussed later in this exercise.
 
-    **TODO:  update image**
     ![Browse the GitHub repository .pipelines folder](./media/01-github-pythonscripts.png)
 
 11. Going back to the Azure DevOps portal browser tab, on the `Model-Train-Register-CI` pipeline run page observe the two stages of the CI pipeline. Select the **Model CI** stage to open the execution log for this pipeline run.
@@ -77,7 +73,6 @@ Using GitHub and GitHub Actions, we will build an end-to-end Machine Learning pr
 
 15. Going back to the pipeline stages page, select the **Train and evaluate model stage** to open the run execution log.
 
-    **TODO:  update image**
     ![Open Run execution log](./media/023-openrunexecutionlog.png)
 
 16. Expand the **Train and evaluate model** task nodes and observe the three main tasks involved in this stage: **Get pipeline ID for execution**, **Trigger ML Training Pipeline** and **Publish artifact is new model was registered**.
@@ -86,12 +81,11 @@ Using GitHub and GitHub Actions, we will build an end-to-end Machine Learning pr
 
 17. To be able to understand the artifacts published in your Azure Machine Learning Workspace, open a new browser tab and sign in to the [Azure Portal](https://portal.azure.com) with the Azure credentials provided in the lab. Open the available Resource Group, locate and select the Machine Learning workspace that was pre-created in the lab environment.
 
-    **TODO:  update image**
     ![Inspect artifacts of the training stage](./media/024-locatethemachinelearningworkspace.png)
 
 18. Select **Launch studio** to navigate to the **Azure Machine Learning Studio**.
 
-19. In the [Azure Machine Learning Studio](https://ml.azure.com), select **Pipelines** from the left navigation menu, go to **Pipeline endpoints** and check the published training pipeline in the `aml-ds400-XXXXXX` workspace.
+19. In the [Azure Machine Learning Studio](https://ml.azure.com), select **Pipelines** from the left navigation menu, go to **Pipeline endpoints** and check the published training pipeline in the `azure-ml-data-science-400-XXXXXX` workspace.
 
     ![Inspect published ML pipeline](./media/025-checktrainingpipeline.png)
 
@@ -135,7 +129,6 @@ The release deployment and batch scoring pipelines have the following behaviors:
 
 6. To be able to understand the artifacts published in your Azure Machine Learning Workspace, go back to the Azure Machine Learning Studio page already opened in your browser and move directly to step 8. If you don't find ML Studio opened from the previous task, open a new browser tab and sign in to the [Azure Portal](https://portal.azure.com) with the Azure credentials provided in the lab. Open the available Resource Group, locate and select the Machine Learning workspace that was pre-created in the lab environment.
 
-    **TODO:  update image**
     ![Inspect artifacts of the training stage](./media/024-locatethemachinelearningworkspace.png)
 
 7. Select **Launch studio** to navigate to the **Azure Machine Learning Studio**.
@@ -164,19 +157,18 @@ In Azure DevOps Pipelines, teams can also take advantage of the Approvals and Ga
 
 4. In the pipeline YAML definition, locate the beginning of the job: Training_Run_Report (1). In the **Tasks** section located on the right, search for the **Manual intervention** task (2) and then select it (3).
 
-    **TODO:  update image**
     ![Locate the manual intervention task](./media/039-create%20task.png)
 
 5. Fill the required fields for your manual intervention task:
    - **Instructions**: `Please approve the registered model.  This will allow the deployment to continue.`
    - **Notify users**: enter the github account email address of the form `github_cloudlabsuser_XXXX@cloudlabsaiuser.com`
 
-    **TODO:  update image**
     ![Configure the manual intervention task](./media/039-manualinterventionconfig.png)
-6. Selecting **Add**, will insert the YAML definition of the task at the end of the **Trigger ML Training Pipeline** stage.
+6. Selecting **Add** will insert the YAML definition of the task at the end of the **Trigger ML Training Pipeline** stage.
 
-    **TODO:  update image**
    ![Manual intervention task YAML](./media/039-manualintervention.png)
+
+   > **Note:** Be sure that the level of indentation for the newly-created manual intervention task on line 90 is the same as the task on line 83.  YAML is a whitespace-sensitive markup language.
 
 7. **Save** and **Run** the pipeline. Select the new pipeline Run from the **Runs** list and select the Train and evaluate model stage to open the execution log page.
 
@@ -191,12 +183,10 @@ We have created sample workflow file train_deploy.yml to train the model and dep
 
 2. Navigate to the already generated repository for this lab, named `azure-ml-data-science-400-lab07`. If the repository is not automatically opened, please select it from the available repositories list.
 
-    **TODO:  update image**
     ![Locate GitHub repository](./media/01-github-selectrepository.png).
 
 3. Navigate to the `.github/workflows` folder and open the train_deploy.yml (1) workflow definition file . Observe the two jobs defined for the GitHub Actions workflow: **train-register** and **deploy** (3). The workflow is triggered (2) when a code change is committed inside the **COVID19Articles_GH** repository folder in the `master` branch.
 
-    **TODO:  update image**
    ![Inspect GitHub Actions workflow definition](./media/036%20-%20github-actions-workflow-definition.png)
 
 4. With the repository opened, select the **Actions** section from the top navigation menu. Observe the active workflow that was already initiated at the first code commit, when the `.github/workflows/train_deploy.yml` definition file was initially created in the repository.
@@ -205,7 +195,6 @@ We have created sample workflow file train_deploy.yml to train the model and dep
 
 5. Going back to the repository files, open the **COVID19Articles_GH/train** folder and select the `train_aml.py` code file. 
 
-    **TODO:  update image**
     ![GitHub Actions locate train_aml.py](./media/036%20-%20githubactions-locate-trainaml.png)
 
 6. Open the `train_aml.py` code file in edit mode.
@@ -242,35 +231,28 @@ We have created sample workflow file train_deploy.yml to train the model and dep
 
 ## Task 6 - Trigger the MLOPS Pipeline when training data changes
 
-In the Azure Portal, we prepared an Azure Function that triggers the above described GitHub workflow every time a new version of the COVID16Articles.csv file is uploaded in the datastore. 
+In the Azure Portal, we prepared an Azure Function that triggers the above described GitHub workflow every time a new version of the COVID16Articles.csv file is uploaded in the datastore.
 
 1. Open the [Azure portal](https://portal.azure.com/) and sign-in using the Azure credentials provided by the lab environment. 
 
-2. From the left navigation menu, select the **Storage accounts** option and locate the storage named `mlstrgXXXXXX` as illustrated bellow. 
+2. From the left navigation menu, select the **Storage accounts** option and locate the storage named `azuremldatasciXXXXXX` as illustrated bellow. 
 
-    **TODO:  update image**
     ![Locate default datastore](./media/040-locatestorageaccount.png)
 
-3. Select `mlstrgXXXXXX` storage account and select **Containers** from the account Overview page.
-
-    **TODO:  update image**
-    ![Select Containers](./media/040-selectcontainers.png)
-
-4. Select the `azureml-blobstore-{container_id}` container. This is the storage container linked to the default **Datastore** used by Azure Machine Learning Workspace.
+3. Select `azuremldatasciXXXXXX` storage account and select **Containers** from the **Data storage** menu.  Select the `azureml-blobstore-{container_id}` container. This is the storage container linked to the default **Datastore** used by Azure Machine Learning Workspace.
 
     ![Select AzureML Container](./media/040-select-azureml-container.png)
 
-5. Navigate to the `training-data\COVID19Articles.csv` file. Download it to your computer and change anything inside the file.
+4. Navigate to the `training-data\COVID19Articles.csv` file. Download it to your computer and change anything inside the file.
 
-6. Upload the new version of COVID19Articles.csv in the same `training-data` folder by using the Upload button from the top menu bar.
+5. Upload the new version of COVID19Articles.csv in the same `training-data` folder by using the Upload button from the top menu bar.
 
     ![Upload a new version of data](./media/040-upload%20the%20new%20version.png)
 
-7. Select the option to overwrite the file since it already exists in the container.
+6. Select the option to overwrite the file since it already exists in the container.
 
     ![Overwrite COVID19Articles.csv file](./media/040-overwritefile.png)
 
-8. Open the GitHub portal, select the `azure-ml-data-science-400-lab-07` repository and select **Actions** from the top menu bar. Notice how the data file update triggered your GitHub Actions workflow execution.
+7. Open the GitHub portal, select the `azure-ml-data-science-400-lab-07` repository and select **Actions** from the top menu bar. Notice how the data file update triggered your GitHub Actions workflow execution.
 
-    **TODO:  update image**
     ![Blob updated triggered GitHub Actions](./media/040-githubtriggeredaction.png)

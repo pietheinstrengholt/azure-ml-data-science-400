@@ -28,7 +28,6 @@
 
 7. Add the required list of variables, using the **+ Add** link at the bottom of the **Variables** section as illustrated in the image below:
 
-    **TODO:  update image**
     ![Configure required variable values in the variable group](../../day-03/media/04-devops-edit-vargroup.png)
 
     Use values listed in the table:
@@ -226,62 +225,52 @@ In the following steps you will create and run a new build pipeline based on the
 
     ![Open the GitHub repository Secrets section](./media/02-setup-03.png)  
 
-4. To allow Azure to trigger a GitHub Workflow we also need a GitHub PAT token with `repo` access so that we can trigger a GH workflow when the training is completed on Azure Machine Learning. In GitHub, under your GitHub logged in user in the right corner, select Settings > Developer Settings > Personal access tokens. Enter a name for the new PAT and select **Generate** at the bottom of the page.
+4. To allow Azure to trigger a GitHub Workflow we also need a GitHub PAT token with `repo` access so that we can trigger a GH workflow when the training is completed on Azure Machine Learning. In GitHub, under your GitHub logged in user in the right corner, select Settings > Developer Settings > Personal access tokens. Enter a name for the new PAT and select **Generate token** at the bottom of the page.
 
-    **TODO:  update image**
     ![Generate PAT token](../../day-03/media/5-createGHPAT.png)
 
 5. Copy the new GH PAT.
 
-    **TODO:  update image**
-    ![Get the new PAT token](../../day-03/media/5-createGHPAT.png)
+    ![Get the new PAT token](../../day-03/media/5-copyGHPAT.png)
 
-6. At repository level, select Settings > Secrets and add the PAT token with the name `PATTOKEN` as a new secret.
+6. Back in the repository, select **Settings** > **Secrets** and add the PAT token with the name `PATTOKEN` as a new secret.
 
     ![Add second secret PATTOKEN](./media/02-setup-05.png)
 
 7. Open the .cloud\.azure\workspace.json file and replace the workspace name and resource group with the ones provided by the lab environment.
 
-    **TODO:  update image**
-    ![Change workspace.json](./media/02-setup-051.png)
-
-    **TODO:  update image**
-    ![Update workspace name and resource group](./media/02-setup-051.png)
+    ![Change workspace.json](../../day-03/media/02-setup-051.png)
 
 ## Task 7 - Setup Azure Function to trigger GitHub Actions dispatch
 
 1. Create an Azure Function App with `PowerShell Core` as the runtime stack.
 
-    **TODO:  update image**
     ![Create Azure Function App](./media/02-setup-azure-function.png)
 
-2. Use the AML workspace storage account as the storage account. Set the plan type to `Consumption (Serverless)`.
+2. Use the Azure Machine Learning workspace storage account as the storage account. Set the plan type to `Consumption (Serverless)`.  Then, select **Review + create** and create the function app.
 
-    **TODO:  update image**
     ![Function App storage account and plan](./media/02-setup-azure-function-2.png)
 
-3. Leave all other options default and create.
-
-4. In the `Configuration` section of the newly created Function App, add the following settings:
+3. In the `Configuration` section of the newly created Function App, add the following settings:
 
     - `GH_PAT` - contains the GitHub personal access token (use the one generated in Task 6)
-    - `ML_DATA_STORAGE_CONNECTION_STRING` - contains the connection string of the AML workspace storage account (the one named like `mlstrgXXXXXX`)
+    - `ML_DATA_STORAGE_CONNECTION_STRING` - contains the connection string of the AML workspace storage account (the one named like `azuremldatasciXXXXXX`).  To get this, navigate to the storage account in the Azure portal, select **Access keys** under the **Security + networking** menu, choose **Show keys**, and copy the **Connection string** for `key1`.
 
-    **TODO:  update image**
     ![Function App Configuration](./media/02-setup-azure-function-3.png)
 
-5. Create a new function, using the following settings:
+4. Create a new function, using the following settings:
 
     - Develop in portal
+    - New Function = `TriggerOnDataChange`
     - Template =  `Azure Blob Storage trigger`
-    - Path = `{azureml-blobstore-container_id}/training-data/COVID19Articles.csv`, replacing `{azureml-blobstore-container_id}` with the name of the blob storage container mapped as the default datastore in the AML workspace.  The `container_id` will be a GUID.
+    - Path = `{azureml-blobstore-container_id}/training-data/COVID19Articles.csv`, replacing `{azureml-blobstore-container_id}` with the name of the blob storage container mapped as the default datastore in the AML workspace.  The `container_id` portion will be a GUID.
     - Storage account connection = `ML_DATA_STORAGE_CONNECTION`
 
     > **Note:**  The `COVID19Articles.csv` should already exist as a result of running one of the previous MLOps pipelines in the setup.
 
     ![Create new function](./media/02-setup-azure-function-4.png)
 
-6. Replace the body of the newly created function with the following code:
+5. Replace the body of the newly created function with the following code:
 
     ```ps
     # Input bindings are passed in via param block.
