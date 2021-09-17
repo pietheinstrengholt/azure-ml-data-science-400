@@ -2,12 +2,13 @@
 
 - [Setup the Lab 07 Workspace](#setup-the-lab-07-workspace)
   - [Task 1 - Configure the Azure DevOps project and required Variable group](#task-1---configure-the-azure-devops-project-and-required-variable-group)
-  - [Task 2 - Create an Azure DevOps Service Connection for the Azure ML Workspace](#task-2---create-an-azure-devops-service-connection-for-the-azure-ml-workspace)
-  - [Task 3 - Import the GitHub repository](#task-3---import-the-github-repository)
-  - [Task 4 - Set up Build, Release Trigger, and Release Multi-Stage Pipelines](#task-4---set-up-build-release-trigger-and-release-multi-stage-pipelines)
-  - [Task 5 - Set up the Release Deployment pipeline](#task-5---set-up-the-release-deployment-pipeline)
-  - [Task 6 -  ML Ops with GitHub Actions and AML environment setup](#task-6----ml-ops-with-github-actions-and-aml-environment-setup)
-  - [Task 7 - Setup Azure Function to trigger GitHub Actions dispatch](#task-7---setup-azure-function-to-trigger-github-actions-dispatch)
+  - [Task 2 - Configure the Lab VM as an Azure DevOps Build Agent](#task-2---configure-the-lab-vm-as-an-azure-devops-build-agent)
+  - [Task 3 - Create an Azure DevOps Service Connection for the Azure ML Workspace](#task-3---create-an-azure-devops-service-connection-for-the-azure-ml-workspace)
+  - [Task 4 - Import the GitHub repository](#task-4---import-the-github-repository)
+  - [Task 5 - Set up Build, Release Trigger, and Release Multi-Stage Pipelines](#task-5---set-up-build-release-trigger-and-release-multi-stage-pipelines)
+  - [Task 6 - Set up the Release Deployment pipeline](#task-6---set-up-the-release-deployment-pipeline)
+  - [Task 7 -  ML Ops with GitHub Actions and AML environment setup](#task-7----ml-ops-with-github-actions-and-aml-environment-setup)
+  - [Task 8 - Setup Azure Function to trigger GitHub Actions dispatch](#task-8---setup-azure-function-to-trigger-github-actions-dispatch)
 
 ## Task 1 - Configure the Azure DevOps project and required Variable group
 
@@ -59,7 +60,39 @@
 
     ![Save the variable group configuration](../../day-03/media/06-devops-save-vargroup.png)
 
-## Task 2 - Create an Azure DevOps Service Connection for the Azure ML Workspace
+## Task 2 - Configure the Lab VM as an Azure DevOps Build Agent
+
+1. Create a new Personal Access Token (PAT) that will be used by the build agent for authentication/authorization:
+
+    ![Create new Personal Access Token](./media/02-setup-create-pat.png)
+
+    Make sure the PAT has a scope of `Full access`:
+
+    ![Configure Personal Access Token](./media/02-setup-configure-pat.png)
+
+    Once the PAT is created, save its value for future use.
+
+2. Create a new agent pool in the project settings:
+
+    ![Create new agent pool](media/02-setup-create-agent-pool.png)
+
+    Make sure the type of the agent pool is `Self-hosted`:
+
+    ![Select agent pool type](./media/02-setup-agent-pool-type.png)
+
+3. In the newly created agent pool, create a new agent. Follow the instructions displayed on the screen (more detailed instructions are available at https://go.microsoft.com/fwlink/?LinkID=825113):
+
+    ![Create new agent in agent pool](media/02-setup-create-new-agent.png)
+
+    See the example below for configuring the agent. Notice the server URL, the PAT token being used, and the option to run the agent as a service:
+
+    ![Configure build agent](./media/02-setup-install-agent.png)
+
+    Upon successful configuration, the newly created agent must show up as `Online`:
+
+    ![Successfully configured build agent](./media/02-setup-running-agent.png)
+
+## Task 3 - Create an Azure DevOps Service Connection for the Azure ML Workspace
 
 Create a new service connection to your Azure ML Workspace to enable executing the Azure ML training pipeline. The connection name needs to match the WORKSPACE_SVC_CONNECTION that you set in the variable group above (e.g. `aml-workspace-connection`).
 
@@ -81,7 +114,7 @@ Create a new service connection to your Azure ML Workspace to enable executing t
 
 > **Note:**  Creating a service connection with Azure Machine Learning workspace scope requires `Owner` or `User Access Administrator` permissions on the Workspace. You will need sufficient permissions to register an application with your Azure AD tenant, or you can get the ID and secret of a service principal from your Azure AD Administrator. That principal must have Contributor permissions on the Azure ML Workspace.
 
-## Task 3 - Import the GitHub repository
+## Task 4 - Import the GitHub repository
 
 1. Go to the [GitHub portal](https://github.com/) and sign in with the Git credentials provided for you.
 2. You will be asked to verify your account, so you should open your user's mailbox in [the Outlook web client](https://outlook.office365.com/) to be able to receive the verification codes for GitHub authentication. Use the same GitHub user account credentials to open Outlook.
@@ -94,7 +127,7 @@ Create a new service connection to your Azure ML Workspace to enable executing t
 
 5. When the new repository is generated, copy your repository URL from the browser address bar since you will need it in the next steps.
 
-## Task 4 - Set up Build, Release Trigger, and Release Multi-Stage Pipelines
+## Task 5 - Set up Build, Release Trigger, and Release Multi-Stage Pipelines
 
 Now that you've provisioned all the required Azure resources and service connections, you can set up the pipelines for training (CI) and deploying (CD) your machine learning model to production. Additionally, you can set up a pipeline for batch scoring.
 In the following steps you will create and run a new build pipeline based on the `COVID19Articles-CI.yml` pipeline definition in your imported repository.
@@ -139,6 +172,15 @@ In the following steps you will create and run a new build pipeline based on the
 
     ![Save the build pipeline](../../day-03/media/018-runsavecipipeline.png)
 
+    >**IMPORTANT**!!!
+    >
+    >Due to changes in Azure Pipelines policies for allocating Microsoft-hosted agents, you must change the `pool` setting in the YAML file as follows:
+    >```yaml
+    >pool: <name-of-agent-pool>
+    >```
+    >where `<name-of-agent-pool>` is the name you used previously to create your self-hosted agent pool.
+    >You should apply this change to all subsequent cases where the `pool` setting is implied.
+
 11. With the created pipeline, select **Rename/move** from the right menu as illustrated bellow:
 
     ![Rename the build pipeline](../../day-03/media/019-renamepipeline.png)
@@ -153,7 +195,7 @@ In the following steps you will create and run a new build pipeline based on the
 
 > **Note:**  While waiting for the CI pipeline to finish, given that it will take 20-25 minutes to complete, you can move on with steps 1 to 9 in the next task to create the release deploy pipeline. Note that you cannot run this second pipeline until the first one is not completed. When both pipelines are created, the CI pipeline triggers the start of the CD one.
 
-## Task 5 - Set up the Release Deployment pipeline
+## Task 6 - Set up the Release Deployment pipeline
 
 1. Open the [Azure DevOps portal](https://dev.azure.com) and sign in with the Azure credentials provided for you in the lab environment.
 
@@ -193,7 +235,7 @@ In the following steps you will create and run a new build pipeline based on the
 
     ![Run the pipeline](../../day-03/media/030-runpipeline.png)
 
-## Task 6 -  ML Ops with GitHub Actions and AML environment setup
+## Task 7 -  ML Ops with GitHub Actions and AML environment setup
 
 1. Sign in to GitHub with your GitHub account.
 
@@ -250,7 +292,7 @@ In the following steps you will create and run a new build pipeline based on the
 
     ![Change workspace.json](../../day-03/media/02-setup-051.png)
 
-## Task 7 - Setup Azure Function to trigger GitHub Actions dispatch
+## Task 8 - Setup Azure Function to trigger GitHub Actions dispatch
 
 1. Create an Azure Function App with `PowerShell Core` as the runtime stack.
 
