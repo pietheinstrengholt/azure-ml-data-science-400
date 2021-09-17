@@ -13,6 +13,14 @@ The high-level steps covered in the lab are:
 - Approve changes after validation to see it move stages
 - Repeat previous steps with data drift triggers
 
+- [Lab 07 - MLOps with Azure Machine Learning, Azure Pipelines, and GitHub Actions](#lab-07---mlops-with-azure-machine-learning-azure-pipelines-and-github-actions)
+  - [Task 1 - Explore lab scenario](#task-1---explore-lab-scenario)
+  - [Task 2 - Observe the execution and artifacts of the existing model training Azure DevOps pipeline](#task-2---observe-the-execution-and-artifacts-of-the-existing-model-training-azure-devops-pipeline)
+  - [Task 3 - Explore the execution of the existing  Azure DevOps release pipeline](#task-3---explore-the-execution-of-the-existing--azure-devops-release-pipeline)
+  - [Task 4 - Explore manual intervention option in Azure DevOps Pipelines](#task-4---explore-manual-intervention-option-in-azure-devops-pipelines)
+  - [Task 5 - Explore the execution of the existing GitHub actions workflow](#task-5---explore-the-execution-of-the-existing-github-actions-workflow)
+  - [Task 6 - Trigger the MLOPS Pipeline when training data changes](#task-6---trigger-the-mlops-pipeline-when-training-data-changes)
+
 ## Task 1 - Explore lab scenario
 
 Managing a virtually non-stop flux of incoming research documents should be based on a fully automated and traceable process. Everything from data to code must be tracked and monitored. The complex processes of Machine Learning model training and operationalization require secure, end-to-end approaches that allow teams of developers and analysts to iterate through multiple versions of the solution.

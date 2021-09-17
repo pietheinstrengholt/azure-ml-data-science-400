@@ -1,5 +1,14 @@
 # Setup the Lab 07 Workspace
 
+- [Setup the Lab 07 Workspace](#setup-the-lab-07-workspace)
+  - [Task 1 - Configure the Azure DevOps project and required Variable group](#task-1---configure-the-azure-devops-project-and-required-variable-group)
+  - [Task 2 - Create an Azure DevOps Service Connection for the Azure ML Workspace](#task-2---create-an-azure-devops-service-connection-for-the-azure-ml-workspace)
+  - [Task 3 - Import the GitHub repository](#task-3---import-the-github-repository)
+  - [Task 4 - Set up Build, Release Trigger, and Release Multi-Stage Pipelines](#task-4---set-up-build-release-trigger-and-release-multi-stage-pipelines)
+  - [Task 5 - Set up the Release Deployment pipeline](#task-5---set-up-the-release-deployment-pipeline)
+  - [Task 6 -  ML Ops with GitHub Actions and AML environment setup](#task-6----ml-ops-with-github-actions-and-aml-environment-setup)
+  - [Task 7 - Setup Azure Function to trigger GitHub Actions dispatch](#task-7---setup-azure-function-to-trigger-github-actions-dispatch)
+
 ## Task 1 - Configure the Azure DevOps project and required Variable group
 
 1. Open the [Azure DevOps portal](https://dev.azure.com/) and select the **Sign in to Azure DevOps** link.
