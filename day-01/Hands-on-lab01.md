@@ -1,12 +1,27 @@
 # Hands-on lab: Training and deploying a model in AML
 
-## Lab overview
+**Contents**
+
+<!-- TOC -->
+
+- [Lab Overview](#lab-overview)
+- [Lab Setup](#lab-setup)
+   - [Task 1: Create a Compute Instance](#task-1-create-a-compute-instance)
+   - [Task 2: Import the Lab Notebooks](#task-2-import-the-lab-notebooks)
+- [Exercise: Training and deploying a model in AML](#exercise-training-and-deploying-a-model-in-aml)
+   - [Task 1: Open Lab Notebook](#task-1-open-lab-notebook)
+   - [Task 2: Execute Notebook](#task-2-execute-notebook)
+
+
+## Lab Overview
 
 In this lab, we will be using a subset of NYC Taxi & Limousine Commission - green taxi trip records available from [Azure Open Datasets](https://azure.microsoft.com/en-us/services/open-datasets/). The data is enriched with holiday and weather data. We will use data transformations and the GradientBoostingRegressor algorithm from the scikit-learn library to train a regression model to predict taxi fares in New York City based on input features such as, number of passengers, trip distance, datetime, holiday information and weather information.
 
 The primary goal of this lab is to learn how to leverage Azure Machine Learning (AML) to provision compute resources to train machine learning models, and then deploy the trained models either to a managed Azure Container Instance (ACI) or to a containerized platform such as Azure Kubernetes Services (AKS).
 
-## Task 1 - Create a Compute Instance
+## Lab Setup
+
+### Task 1: Create a Compute Instance
 
 In this task, you add a compute resource to your Azure Machine Learning workspace.
 
@@ -28,7 +43,7 @@ In this task, you add a compute resource to your Azure Machine Learning workspac
 
 4. Wait for the Compute Instance to be ready. It takes approximately 3-5 minutes for the compute provisioning to complete.
 
-## Task 2 - Import the Lab Notebooks
+### Task 2: Import the Lab Notebooks
 
 In this task, you import Jupyter notebooks from GitHub that you will use to complete the exercises in this hands-on lab.
 
@@ -54,12 +69,14 @@ In this task, you import Jupyter notebooks from GitHub that you will use to comp
 
 5. Wait for the `clone` command to finish importing the repo.
 
-## Task 3 - Open Notebook for this lab
+## Exercise: Training and deploying a model in AML
+
+### Task 1: Open Lab Notebook
 
 1. From within Jupyter Notebooks interface navigate to `ml-labs/azure-ml-data-science-400/day-01/notebooks`.
 
 1. Open `Lab01 - Training and deploying a model in AML`. This is the Python notebook you will step through executing in this lab.
 
-## Task 4 - Train and deploy a model in AML
+### Task 2: Execute Notebook
 
 1. Follow the instructions within the notebook, `Lab01 - Training and deploying a model in AML`, to complete the lab.

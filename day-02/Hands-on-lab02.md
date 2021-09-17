@@ -1,5 +1,19 @@
 # Hands-on-lab: Implementing ML pipelines with the designer
 
+**Table of content**
+
+* [Lab overview](#Lab-overview)
+* [Exercise 1 - Design a Machine Learning pipeline with the Designer](#Exercise-1---Design-a-Machine-Learning-pipeline-with-the-Designer)
+  * [Task 1 - Create the pipeline and select the default compute target](#Task-1---Create-the-pipeline-and-select-the-default-compute-target)
+  * [Task 2 - Import and prepare the data](#Task-2---Import-and-prepare-the-data)
+  * [Task 3 - Train a machine learning model](#Task-3---Train-a-machine-learning-model)
+  * [Task 4 - Submit and evaluate the model](#Task-4---Submit-and-evaluate-the-model)
+* [Exercise 2 - Publish ML pipeline with REST endpoint](#Exercise-2---Publish-ML-pipeline-with-REST-endpoint)
+  * [Task 1 - Set pipeline parameters](#Task-1---Set-pipeline-parameters)
+  * [Task 2 - Create a REST endpoint to publish the ML pipeline](#Task-2---Create-a-REST-endpoint-to-publish-the-ML-pipeline)
+* [Exercise 3 - Test ML pipeline Rest endpoint](#Exercise-3---Test-ML-pipeline-Rest-endpoint)
+  * [task1 - Submit a pipeline run from AML Studio](#task1---Submit-a-pipeline-run-from-AML-Studio)
+  * [task2 - Submit a pipeline run using the REST endpoint](#task2---Submit-a-pipeline-run-using-the-REST-endpoint)
 
 ## Lab overview
 
