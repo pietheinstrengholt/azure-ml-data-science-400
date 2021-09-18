@@ -1,4 +1,16 @@
-# Hands-on lab: Implementing and monitoring a batch scoring solution
+# Hands-on lab: Implementing and monitoring a Batch Scoring solution
+
+**Contents**
+
+<!-- TOC -->
+
+- [Lab Overview](#lab-overview)
+- [Lab Setup](#lab-setup)
+   - [Task 1: Create a Compute Instance](#task-1-create-a-compute-instance)
+   - [Task 2: Import the Lab Notebooks](#task-2-import-the-lab-notebooks)
+- [Exercise: Implementing and monitoring a Batch Scoring solution](#exercise-implementing-and-monitoring-a-batch-scoring-solution)
+   - [Task 1: Open Lab Notebook](#task-1-open-lab-notebook)
+   - [Task 2: Execute Notebook](#task-2-execute-notebook)
 
 ## Lab overview
 
@@ -11,7 +23,9 @@ In this lab, we will be using [Azure Machine Learning Pipelines](https://docs.mi
 
 Finally, we will also review how to monitor the batch scoring pipeline runs from within Azure Machine Learning Studio.
 
-## Task 1 - Create a Compute Instance
+## Lab Setup
+
+### Task 1: Create a Compute Instance
 
 In this task, you add a compute resource to your Azure Machine Learning workspace.
 
@@ -33,7 +47,7 @@ In this task, you add a compute resource to your Azure Machine Learning workspac
 
 4. Wait for the Compute Instance to be ready. It takes approximately 3-5 minutes for the compute provisioning to complete.
 
-## Task 2 - Import the Lab Notebooks
+### Task 2: Import the Lab Notebooks
 
 In this task, you import Jupyter notebooks from GitHub that you will use to complete the exercises in this hands-on lab.
 
@@ -59,12 +73,14 @@ In this task, you import Jupyter notebooks from GitHub that you will use to comp
 
 5. Wait for the `clone` command to finish importing the repo.
 
-## Task 3 - Open Notebook for this lab
+## Exercise: Implementing and monitoring a Batch Scoring solution
+
+### Task 1: Open Lab Notebook
 
 1. From within Jupyter Notebooks interface navigate to `ml-labs/azure-ml-data-science-400/day-02/notebooks`.
 
 1. Open `Lab03 - Implementing and monitoring a batch scoring solution`. This is the Python notebook you will step through executing in this lab.
 
-## Task 4 - Train and deploy a model in AML
+### Task 2: Execute Notebook
 
 1. Follow the instructions within the notebook, `Lab03 - Implementing and monitoring a batch scoring solution`, to complete the lab.
