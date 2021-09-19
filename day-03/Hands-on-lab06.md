@@ -1,10 +1,5 @@
 # Lab 06 - Using AML from Synapse Analytics Studio
 
-## Notes (will be removed)
-DataSet
-Hardware part performance (https://automlsamplenotebookdata.blob.core.windows.net/automl-sample-notebook-data/machineData.csv)
-Will need to take a subset of the above data to use as the R&D table
-
 ## Lab overview
 
 Azure Synapse Analytics is an enterprise-grade analytics service and a one-stop-shop for all your analytical processing needs. Azure Synapse Analytics combines enterprise data warehousing, industry-leading SQL (both serverless and dedicated), Spark technologies, ETL/ELT pipelines, and deep integrations with other Azure services such as Power BI, Cosmos DB, and Azure ML. All of these integrations and capabilities are made available via a single user interface, Synapse Studio. The focus of this lab is to explore the integration of Azure Machine Learning with Azure Synapse Analytics.
