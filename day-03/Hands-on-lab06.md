@@ -213,11 +213,35 @@ Contoso Hardware would like to streamline the process of identifying a suitable 
 
 ### Task 2: View details of the experiment run in AML Studio
 
+The results of the Automated Machine Learning experiment has completed and the best fit model has been identified. The notebook output from the previous task shows the best model having been registered with MLFlow. Access the Azure Machine Learning environment to view full details of the run.
+
+1. In the output of Cell 6, select the link to access the experiment in the Azure Machine Learning workspace.
+
+    ![The output of cell 6 displays with the Azure Machine Learning experiment link highlighted.](media/amlenvironment_link.png "Azure Machine Learning experiment link")
+
+2. In Azure Machine Learning Studio, the details of the run are displayed along with the identified best model.
+   
+    ![The experiment details displays in Azure Machine Learning Studio.](media/amlrun_details.png "Automated ML experiment details")
+
+3. Beneath the **Best model summary** heading, select the **Algorithm Name** link.
+
+    ![The best model algorithm link is highlighted.](media/amlstudio_bestalgorithmlink.png "Best algorithm")
+
+4. On the model screen, select the **Explanations** tab. If not already selected, choose the **Aggregate feature importance** section. The chart displayed shows the most influential features in the determination of the predicted value. In this case, the MMAX and PRP values are the most influential.
+
+    ![The Aggregate feature importance graph displays indicating the most influential features in the prediction of the ERP value for the model.](media/aml_aggregatefeatureimportance.png "Aggregate feature importance")
+
+5. In cell 7 of the notebook, the best model is registered using MLFlow. To view the registered model, select the **Models** item from the left menu of the Azure Machine Learning Studio interface.
+
+    ![The Azure Machine Learning Studio interace displays with the Models item selected from the left menu and the best model from the experiment run is found in the model list.](media/aml_registeredmodel.png "Registered models")
+
 ## Exercise 4: Consume the trained regression model
 
 Now that the best regression model has been trained and identified, it is now ready for use. Contoso Hardware has received benchmark data for prospective compute modules. This data is available as a table in the dedicated SQL Pool of Azure Synapse Analytics. In this exercise, the regression model enhances the data obtained for the prospective hardware and predicts the ERP value.
 
-### Task 1: Enrich research and development SQL table with the trained model
+### Task 1: Load prospective compute model data
+
+### Task 2: Enrich research and development SQL table with the trained model
 
 ## Conclusion
 
