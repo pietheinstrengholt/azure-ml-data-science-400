@@ -95,17 +95,126 @@ The Azure Synapse Analytics managed identity now has Contributor access to the A
 
 Contoso Hardware Research and Development has been provided a sample dataset in CSV format to use when training the machine learning model. First, this data needs to be ingested. This exercise uses the Apache Spark pool in Azure Synapse Analytics to ingest the dataset and persist the data as a Spark table. From a physical perspective, when a Spark table is persisted, the data is stored in parquet format in the Synapse Workspace storage account.
 
-### Task 1: Ingest dataset into a Spark table
+### Task 1: Grant Storage Blob Contributor to the user account
 
-TODO: Create Synapse Notebook to ingest and persist the dataset
+When executing a Synapse Notebook it will run under the context of the user executing the notebook. Therefore, the current user needs to have sufficient access to the storage account to write the Spark table parquet files.
+
+1. In the Azure Portal, open the lab resource group, and select the **datalake{SUFFIX}** storage account.
+
+2. From the left menu, select **Access control (IAM)**.
+
+3. Expand the **+ Add** button and select **Add role assignment**.
+
+4. In the **Add role assignment** blade, select **Storage Blob Data Contributor**.
+
+5. In the **Select**, search for and select your user account, then select **Save**.
+
+    ![The Add role assignment blade displays with the previous values.](media/addusertoblobstoragecontributor.png "Add Storage Blob Data Contributor")
+
+### Task 2: Ingest dataset into a Spark table
+
+This task demonstrates ingesting CSV data and storing the results as a Spark table.
+
+1. In Synapse Studio, select the **Develop** hub from the left menu.
+
+2. Expand the **+** menu on the Develop menu, and select **Notebook**.
+
+    ![Synapse Studio displays with the Develop hub selected from the left menu, and the + button expanded with the Notebook item highlighted.](media/synapse_createnotebook.png "Create new Notebook")
+
+3. In the Notebook toolbar, expand the **Attach to** drop down and select **sparkpool01**.
+
+    ![A Synapse Notebook displays with the Attach To field set to sparkpool01.](media/synapsenotebook_attachtosparkpool01.png "Attach to sparkpool01")
+
+4. In the first cell of the notebook, copy and paste the following code to read the CSV data and display a preview of the data:
+
+    ```python
+    import pandas as pd
+
+    df = pd.read_csv('https://automlsamplenotebookdata.blob.core.windows.net/automl-sample-notebook-data/machineData.csv')
+
+    display(df)
+    ```
+
+5. Execute the cell by selecting the triangular play button in the cell margin. Please note that it takes a few minutes for a Spark cluster to be provisioned when the first cell is executed. Please note that it is safe to ignore the warning message displayed at the bottom of the output.
+
+    ![The triangular play button is highlighted to the left of the cell. The output displays a sampling of the data read in from the CSV file.](media/readcsv_displaydataframe.png "Sample data display")
+
+6. Beneath the first cell, select the **+ Code** button to add a new cell. Copy and paste the following code to create a Spark database and table for the training data, then, execute the cell.
+
+    ```python
+    spark.sql("CREATE DATABASE research_development")
+
+    sparkdf = spark.createDataFrame(df)
+
+    sparkdf.write.saveAsTable("research_development.compute_module_data")
+    ```
+
+    ![The notebook cell to create the Spark database and table displays that the command has been executed.](media/createsparkdatabaseandtablecellexecution.png "Create Spark database and table")
+
+7. Close the notebook document and select the **Close + discard changes** button. There isn't a need to save this notebook.
 
 ## Exercise 3: Train a regression model
 
-Contoso Hardware Research and Development has been tasked with training a model that will predict a compute module's estimated relative performance (ERP) based on a series of features. The dataset that has been provided is a labeled dataset; the ERP value for each compute module listed in the file is known along with its corresponding attribute values. In this exercise, the provided dataset is used to train a regression model to predict the ERP value for future hardware.
+Contoso Hardware Research and Development has been tasked with training a model that will predict a compute module's estimated relative performance (ERP) based on a series of features. The dataset that has been provided is a labeled dataset; the ERP value for each compute module listed in the file is known along with its corresponding attribute values. In the previous exercise, this training data was ingested into a Spark table. In this exercise, the Spark table is used to train a regression model to predict the ERP value for future hardware.
 
 ### Task 1: Create new AutoML experiment using the AML Integration with Azure Synapse Analytics
 
 Contoso Hardware would like to streamline the process of identifying a suitable machine learning algorithm. To do this, they will leverage the AutoML capabilities in Azure Machine Learning that will evaluate multiple algorithms in parallel to determine the best fit. Furthermore, the AML integration with Azure Synapse Analytics also eases the generation of the AutoML experiment. In this task, an AutoML experiment is created on the provided dataset to obtain a regression model to predict the ERP value.
+
+1. In Synapse Studio, select the **Data** hub from the left menu.
+
+2. Remaining on the **Workspace** tab, hover over the **Databases** header, then select the ellipsis button that appears to the right of the heading and select the **Refresh** button.
+
+3. Once refreshed, the **research_development (Spark)** database is visible.
+
+4. Expand the **research_development** database, and its **Tables** folder to reveal the **compute_module_data** table.
+
+    ![Synapse Studio displays with the Data hub selected from the left menu. The Databases Refresh button is selected. The research_development database is expanded and the compute_module_data table is highlighted.](media/sparkdatabasetableexpansion.png "Spark database and table")
+
+5. Hover over the **compute_module_data** table, select the ellipsis button and choose **Machine Learning**, then **Train a new model**.
+
+    ![The ellipsis menu is expanded on the compute_module_data Spark table. The Machine Learning item is expanded with the Train a new model item highlighted.](media/sparktable_trainanewmodel.png "Train a new model")
+
+6. In the Train a new model blade, select **Regression**, then select **Continue**.
+
+    ![The Train a new model blade displays with the Regression model type selected.](media/amlwizard_regressionmodeltype.png "Train a new regression model")
+
+7. In the Train a new model - Configure experiment blade, populate the form as follows and select **Continue**:
+
+    | Field | Value |
+    |-------|-------|
+    | Azure Machine Learning Workspace | amlworkspace{SUFFIX} |
+    | Experiment name | leave default value |
+    | Best model name | leave default value |
+    | Target column | ERP (long) |
+    | Apache Spark pool | sparkpool01 |
+
+    ![The configure experiment blade is shown populated with the preceding value.](media/amlwizard_configureexperiment.png "Configure experiment blade")
+
+8. In the Train a new model - Configure regression model, populate the form as follows, then select **Open in notebook**.
+
+    | Field | Value |
+    |-------|-------|
+    | Primary metric | Normalized root mean squared error |
+    | Maximum training job time (hours) | 0.3 |
+    | Max concurrent iterations | 4 |
+    | ONNX model compatibility | Enable |
+
+    ![The Configure regression model blade displays with the preceding values. The Open in notebook button is highlighted.](media/amlwizard_configureregressionmodel.png "Configure regression model blade")
+
+9. A new Notebook is generated and is populated with the code that leverages the integration with Azure Machine Learning to create and run the experiment. From the Notebook toolbar, select the **Run all** button to execute the notebook.
+
+    ![The Run all button is highlighted in the generated notebook toolbar.](media/amlwizard_generatednotebook_runall.png "Run all cells")
+
+10. Once the 6th cell executes, the output displays a URL into the experiment in the Azure Machine Learning portal. Select this link to watch the experiment progress if desired.
+
+    ![Cell 6 output contains a link to the Azure Machine Learning portal experiment.](media/amlexperimentlink_cell6output.png "Azure Machine Learning experiment link")
+
+11. The experiment runs in the 7th (and last) cell. This cell will take approximately 30 minutes to complete. Please remain patient and let the notebook execution complete uninterrupted. Grab a snack and refreshment!
+
+    ![The experiment run cell completes in 28 minutes.](media/amlnotebook_experimentcelloutput.png "Experiment completion")
+
+12. Keep this notebook open once execution completes.
 
 ### Task 2: View details of the experiment run in AML Studio
 
@@ -113,7 +222,7 @@ Contoso Hardware would like to streamline the process of identifying a suitable 
 
 Now that the best regression model has been trained and identified, it is now ready for use. Contoso Hardware has received benchmark data for prospective compute modules. This data is available as a table in the dedicated SQL Pool of Azure Synapse Analytics. In this exercise, the regression model enhances the data obtained for the prospective hardware and predicts the ERP value.
 
-### Task 1: Enrich research and development table with the trained model
+### Task 1: Enrich research and development SQL table with the trained model
 
 ## Conclusion
 
