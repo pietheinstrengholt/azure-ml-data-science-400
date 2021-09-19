@@ -4,7 +4,7 @@
 
 Azure Synapse Analytics is an enterprise-grade analytics service and a one-stop-shop for all your analytical processing needs. Azure Synapse Analytics combines enterprise data warehousing, industry-leading SQL (both serverless and dedicated), Spark technologies, ETL/ELT pipelines, and deep integrations with other Azure services such as Power BI, Cosmos DB, and Azure ML. All of these integrations and capabilities are made available via a single user interface, Synapse Studio. The focus of this lab is to explore the integration of Azure Machine Learning with Azure Synapse Analytics.
 
-Contoso Hardware is in the business of building high-performing hardware modules for smart factory equipment. Contoso has partnered with many vendors to obtain critical compute components that provide processing power for initial signal acquisition and processing of vibration-related data, namely displacement (Peak to Peak), Velocity (Peak), Acceleration (True Peak), and High-Frequency Accelerations (RMS). This data is ultimately used for predictive maintenance functions, performing specific actions, and initiating alerts should failure conditions arise. Therefore, it is vital that Constoso Hardware's product yield the best performance possible for its form factor.
+Contoso Hardware is in the business of building high-performing hardware modules for smart factory equipment. Contoso has partnered with many vendors to obtain critical compute components that provide processing power for initial signal acquisition and processing of vibration-related data, namely displacement (Peak to Peak), Velocity (Peak), Acceleration (True Peak), and High-Frequency Accelerations (RMS). This data is ultimately used for predictive maintenance functions, performing specific actions, and initiating alerts should failure conditions arise. Therefore, it is vital that Contoso Hardware's product yield the best performance possible for its form factor.
 
 Contoso Hardware Research and Development has been tasked with training a machine learning model that can quickly assess the estimated relative performance of a vendor compute module. Identifying the features that lead to a more performing compute module can assist in the design of new hardware and also the quick elimination of candidate hardware proposed by external vendors. Contoso Hardware has provided the following dataset structure to assist with this effort.
 
@@ -220,7 +220,7 @@ The results of the Automated Machine Learning experiment has completed and the b
     ![The output of cell 6 displays with the Azure Machine Learning experiment link highlighted.](media/amlenvironment_link.png "Azure Machine Learning experiment link")
 
 2. In Azure Machine Learning Studio, the details of the run are displayed along with the identified best model.
-   
+
     ![The experiment details displays in Azure Machine Learning Studio.](media/amlrun_details.png "Automated ML experiment details")
 
 3. Beneath the **Best model summary** heading, select the **Algorithm Name** link.
@@ -233,16 +233,126 @@ The results of the Automated Machine Learning experiment has completed and the b
 
 5. In cell 7 of the notebook, the best model is registered using MLFlow. To view the registered model, select the **Models** item from the left menu of the Azure Machine Learning Studio interface.
 
-    ![The Azure Machine Learning Studio interace displays with the Models item selected from the left menu and the best model from the experiment run is found in the model list.](media/aml_registeredmodel.png "Registered models")
+    ![The Azure Machine Learning Studio interface displays with the Models item selected from the left menu and the best model from the experiment run is found in the model list.](media/aml_registeredmodel.png "Registered models")
 
 ## Exercise 4: Consume the trained regression model
 
 Now that the best regression model has been trained and identified, it is now ready for use. Contoso Hardware has received benchmark data for prospective compute modules. This data is available as a table in the dedicated SQL Pool of Azure Synapse Analytics. In this exercise, the regression model enhances the data obtained for the prospective hardware and predicts the ERP value.
 
-### Task 1: Load prospective compute model data
+### Task 1: Load prospective compute module data
+
+1. In Synapse Studio, select the **Develop** hub from the left menu. Expand the **+** menu item and choose **SQL script**.
+
+    ![The Synapse Studio interface displays with the Develop hub item selected from the left menu. The + menu is expanded with the SQL script item highlighted.](media/synapsestudio_newsqlscript.png "Create new SQL script")
+
+2. In the query window toolbar, choose **sqlpool01** in the **Connect to** field.
+
+3. In the query window, paste then run the following script to create the PROPOSED_HARDWARE table in the SQL pool. Please note that the ERP field is filled with a zero value. This field will be populated by the value returned from the trained regression model.
+
+    ```sql
+    CREATE TABLE PROPOSED_HARDWARE (
+        VendorName varchar(20),
+        ModelName varchar(20),
+        MYCT bigint,
+        MMIN bigint,
+        MMAX bigint,
+        CACH bigint,
+        CHMIN bigint,
+        CHMAX bigint,
+        PRP bigint,
+        ERP bigint
+    );
+
+    INSERT INTO PROPOSED_HARDWARE VALUES ('amdahl','470v/b',26,8000,32000,64,8,32,318,0);
+    INSERT INTO PROPOSED_HARDWARE VALUES ('cdc', 'omega:480-ii',50,1000,4000,8,1,5,29,0);
+    INSERT INTO PROPOSED_HARDWARE VALUES ('cdc','omega:480-iii',50,2000,8000,8,1,5,71,0);
+    INSERT INTO PROPOSED_HARDWARE VALUES ('dec','vax:11/730',810,1000,5000,0,1,1,20,0);
+    INSERT INTO PROPOSED_HARDWARE VALUES ('dec','vax:11/750',320,512,8000,4,1,5,40,0);
+    INSERT INTO PROPOSED_HARDWARE VALUES ('dec','vax:11/780',200,512,8000,8,1,8,62,0);
+    INSERT INTO PROPOSED_HARDWARE VALUES ('honeywell','dps:8/62',140,2000,32000,32,1,54,189,0);
+    INSERT INTO PROPOSED_HARDWARE VALUES ('honeywell','dps:8/20',140,2000,4000,8,1,20,22,0);
+    INSERT INTO PROPOSED_HARDWARE VALUES ('magnuson','m80/32',100,1000,8000,24,3,6,32,0);
+    INSERT INTO PROPOSED_HARDWARE VALUES ('magnuson','m80/42',50,2000,16000,12,3,16,45,0);
+    ```
+
+    ![The script window displays populated with the previous query. The Connect to field and Run button are highlighted in the query toolbar menu.](media/synapse_sqlwindowloadproposedhardware.png "SQL Query window")
+
+4. Close the query window and discard the changes.
 
 ### Task 2: Enrich research and development SQL table with the trained model
 
+The proposed hardware data is loaded into the SQL pool, and the ERP value for all entries is set to 0 and is ready to be predicted by the model.
+
+1. In Synapse Studio, select the **Data** hub from the left menu. Expand the **Databases** header, then the **sqlpool01** database. Expand the **Tables** folder to reveal the `PROPOSED_HARDWARE` table that was populated in the previous task.
+
+    ![The Synapse Studio interface displays with the Data hub selected in the left menu. In the Data hub blade, the Databases section is expanded along with the sqlpool01 database. The Tables collection is also expanded revealing the PROPOSED_HARDWARE table.](media/synapsestudio_reveal_proposedhardwaretable.png "SQL pool database tables")
+
+2. Hover over the `PROPOSED_HARDWARE` table and select the ellipsis to reveal the Actions menu. Expand the **Machine Learning** option, and choose **Predict with a model**.
+
+    ![The Actions menu is expanded next to the PROPOSED_HARDWARE table with the Machine Learning option expanded and the Predict with a model item selected.](media/synapse_sqltablepredictwithamodel_menu.png "Predict with a model")
+
+3. On the **Predict with a model** blade, select the lab Azure Machine Learning workspace. This will populate the registered model in a table below the workspace selection. This is the regression model that was trained and registered earlier in the lab. Select this model from the listing, and choose **Continue**.
+
+    ![The Predict with a model blade displays with the lab Azure Machine Learning workspace selected along with the regression model.](media/synapsestudio_predictwithmodelblade_modelselection.png "Azure Machine Learning model selection")
+
+4. On the input/output mapping blade, the input mapping is pre-populated as the fields in the table match the model input. In the Output mapping, modify the value to specify **ERP** with the output type **bigint**. Select **Continue**.
+
+    ![The Predict with a model input and output mapping blade is displayed with the model output field ERP highlighted.](media/synapse_predictwithamodel_inputoutputmapping.png "Input/output mapping")
+
+5. In the **Stored procedure** blade, populate the form as follows, then select **Deploy model + open script**. Deployment will take a few moments.
+
+    | Field | Value |
+    |-------|-------|
+    | Stored procedure name | [dbo].[predictERP] |
+    | Select target table | Create new |
+    | New table | [dbo].[models] |
+
+    ![The stored procedure blade displays populated with the preceding values.](media/synapsestudio_modelprocandtable.png "Stored procedure blade")
+
+6. In the script window, copy the value of the model id and store it in a text editor.
+
+   ![A portion of the SQL script is shown with the model id highlighted.](media/synapse_scriptmodel.png "SQL script model id")
+
+7. The T-SQL code that is generated will only return the results of the prediction, without actually saving them. Replace the script with the following, be sure to replace the **{MODEL ID GOES HERE}** value. Please note that the **MERGE** statement may show a syntax problem in the user interface, this is not the case and can be safely ignored.
+
+    ```sql
+    ALTER PROCEDURE [dbo].[predictERP]
+    AS
+    BEGIN
+        --retrieve the rows where ERP is not populated
+        SELECT VendorName, ModelName, MYCT, MMIN, MMAX, CACH, CHMIN, CHMAX, PRP
+        INTO #predicterp
+        FROM [dbo].[PROPOSED_HARDWARE]
+        WHERE ERP = 0;
+
+        SELECT VendorName, ModelName, MYCT, MMIN, MMAX, CACH, CHMIN, CHMAX, PRP, CAST(variable_out1 as bigint) as ERP
+        INTO #pred
+        FROM PREDICT (MODEL = (SELECT [model] FROM [dbo].[models] WHERE [ID] = '{MODEL ID GOES HERE}'),
+                    DATA = #predicterp,
+                    RUNTIME = ONNX) WITH ([variable_out1] [real])
+        MERGE [dbo].[PROPOSED_HARDWARE] as target
+            USING (select * from #pred) as source (VendorName, ModelName, MYCT, MMIN, MMAX, CACH, CHMIN, CHMAX, PRP, ERP)
+        ON
+            (target.VendorName = source.VendorName and target.ModelName = source.ModelName and target.MYCT = source.MYCT
+            and target.MMIN = source.MMIN and target.MMAX = source.MMAX and target.CACH = source.CACH and target.CHMIN = source.CHMIN
+            and target.CHMAX = source.CHMAX and target.PRP = source.PRP)  
+            WHEN MATCHED THEN
+                UPDATE SET target.ERP = source.ERP;
+    END
+    GO
+    ```
+
+    ![The SQL script window displays with the aforementioned query.](media/synapsestudio_modelproc.png "SQL query window")
+
+8. Clear the SQL script text, and execute the following to populate the ERP value in the PROPOSED_HARDWARE table. Notice how the ERP column is now a non-zero value.
+
+    ```sql
+    EXEC [dbo].[predictERP]
+    SELECT * from [dbo].[PROPOSED_HARDWARE]
+    ```
+
+    ![The SQL script and output displays with the ERP column highlighted having non-zero values.](media/synapsestudio_runmodel.png "Predict model results")
+
 ## Conclusion
 
-This lab leveraged the integration of Azure Synapse Analytics and Azure Machine Learning to evaluate multiple regression algorithms. The best fit model was identified and used to enhance the prospective hardware datasets using SQL PREDICT.
+This lab leveraged the integration of Azure Synapse Analytics and Azure Machine Learning to evaluate multiple regression algorithms. The best fit model was identified and used to enhance the prospective hardware table using the SQL PREDICT statement encapsulated in a stored procedure.
