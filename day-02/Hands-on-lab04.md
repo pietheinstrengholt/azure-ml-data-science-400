@@ -249,8 +249,8 @@ You can observe on the environments page of the interface, if you go to the "Cus
 
 Before the build:
 
-![Build environment version from Azure ML interface 1](media/LAB05-16-Building-environment-version-from-interface-1.png)
+![Build environment version from Azure ML interface 1](media/LAB04-16-Building-environment-version-from-interface-1.png)
 
 After the build:
 
-![Build environment version from Azure ML interface 2](media/LAB05-16-Building-environment-version-from-interface-2.png)
+![Build environment version from Azure ML interface 2](media/LAB04-16-Building-environment-version-from-interface-2.png)
