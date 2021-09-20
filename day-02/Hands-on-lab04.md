@@ -6,6 +6,22 @@ This Lab has been run on a "Standard_DS3_v2 (4 cores, 14 GB RAM, 28 GB disk)" co
  - LAB04_2_Train_Model.ipynb: Step 2 about training and evaluating models (~6 min.)
  - LAB04_3_Create_Docker_Container_Image_for_Scoring.ipynb: Task 2 - Deploy on managed compute and test live (~20-25 min.)
 
+### Table of contents
+
+* [Source dataset used by the lab](#Source-dataset-used-by-the-lab)
+* [Reminder Batch scoring vs. Real-time scoring](#Quick-reminder-about-batch-scoring-(already-seen)-vs.-real-time-scoring)
+* [Lab overview](#Lab-overview)
+* [Lab prerequisites](#Lab prerequisites)
+* [Exercise 1 - Train a Classifier](#Exercise-1---Train-a-Classifier)
+  * [Task 1 - LAB04_1_Data_Preparation.ipynb](#Task-1---LAB04_1_Data_Preparation.ipynb)
+  * [Task 2 - LAB04_2_Train_Model.ipynb](#Task-2---LAB04_2_Train_Model.ipynb)
+* [Exercise 2 - Deploy models on managed computed within Docker container images](#Exercise-2---Deploy-models-on-managed-computed-within-Docker-container-images)
+  * [Task 1 - Test locally with Local Web service Compute target](#Task-1---Test-locally-with-Local-Web-service-Compute-target)
+  * [Task 2 - Deploy on managed compute and test live](#Task-2---Deploy-on-managed-compute-and-test-live)
+* [Exercise 3 - Deploy custom Docker container image with managed compute](#Exercise-3---Deploy-custom-Docker-container-image-with-managed-compute)
+  * [task1 - Deploy custom Docker container image with managed compute](#task1---Deploy-custom-Docker-container-image-with-managed-compute)
+  * [task2 - Pinning packages versions with requirements.txt](#task2---Pinning-packages-versions-with-requirements.txt)
+
 ## Source dataset used by the lab
 
 ### COVID-19 Case Surveillance Public Use Data
@@ -129,7 +145,7 @@ Open the data preparation Notebook "LAB04_1_Data_Preparation_COVID-19-Case-Surve
 
 Now execute the file cell by cell.
 
-### Task 2 - Train_Model.ipynb
+### Task 2 - LAB04_2_Train_Model.ipynb
 
 Open the notebook "Train_Model.ipynb" and execute cell by cell.
 
