@@ -11,7 +11,7 @@ This Lab has been run on a "Standard_DS3_v2 (4 cores, 14 GB RAM, 28 GB disk)" co
 * [Source dataset used by the lab](#Source-dataset-used-by-the-lab)
 * [Reminder Batch scoring vs. Real-time scoring](#Quick-reminder-about-batch-scoring-(already-seen)-vs.-real-time-scoring)
 * [Lab overview](#Lab-overview)
-* [Lab prerequisites](#Lab prerequisites)
+* [Lab prerequisites](#Lab-prerequisites)
 * [Exercise 1 - Train a Classifier](#Exercise-1---Train-a-Classifier)
   * [Task 1 - LAB04_1_Data_Preparation.ipynb](#Task-1---LAB04_1_Data_Preparation.ipynb)
   * [Task 2 - LAB04_2_Train_Model.ipynb](#Task-2---LAB04_2_Train_Model.ipynb)
