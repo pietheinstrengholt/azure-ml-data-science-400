@@ -7,7 +7,7 @@
 - [Lab Setup](#lab-setup)
    - [Task 1: Create a Compute Instance](#task-1-create-a-compute-instance)
    - [Task 2: Import the Lab Notebooks](#task-2-import-the-lab-notebooks)
-   - [Additional Lab Requirements](#additional-lab-requirements)
+- [Additional Lab Requirements](#additional-lab-requirements)
 
 ## Lab Setup
 
@@ -59,7 +59,7 @@ In this task, you import Jupyter notebooks from GitHub that you will use to comp
 
 5. Wait for the `clone` command to finish importing the repo.
 
-### Additional Lab Requirements
+## Additional Lab Requirements
 
 The lab will create the following resources on the fly and thus we need to ensure necessary quota for the lab user.
 
