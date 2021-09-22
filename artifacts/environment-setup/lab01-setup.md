@@ -7,6 +7,7 @@
 - [Lab Setup](#lab-setup)
    - [Task 1: Create a Compute Instance](#task-1-create-a-compute-instance)
    - [Task 2: Import the Lab Notebooks](#task-2-import-the-lab-notebooks)
+   - [Additional Lab Requirements](#additional-lab-requirements)
 
 ## Lab Setup
 
@@ -57,3 +58,11 @@ In this task, you import Jupyter notebooks from GitHub that you will use to comp
    ![In the Jupyter terminal window, the commands listed above are displayed.](media/jupyter-terminal.png "Import repository")
 
 5. Wait for the `clone` command to finish importing the repo.
+
+### Additional Lab Requirements
+
+The lab will create the following resources on the fly and thus we need to ensure necessary quota for the lab user.
+
+- AML compute cluster vm_size='Standard_DS12_v2', max_nodes=2
+- ACI container cpu_cores=3, memory_gb=15
+- AKS cluster Standard_D3_v2 (default is 3 nodes)
