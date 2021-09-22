@@ -1,5 +1,21 @@
 # Lab 06 - Using AML from Synapse Analytics Studio
 
+- [Lab 06 - Using AML from Synapse Analytics Studio](#lab-06---using-aml-from-synapse-analytics-studio)
+  - [Lab overview](#lab-overview)
+  - [Exercise 1: Establish a linked service connection to the Azure Machine Learning workspace](#exercise-1-establish-a-linked-service-connection-to-the-azure-machine-learning-workspace)
+    - [Task 1: Grant Contributor rights to the Azure Machine Learning Workspace to the Synapse Workspace Managed Identity](#task-1-grant-contributor-rights-to-the-azure-machine-learning-workspace-to-the-synapse-workspace-managed-identity)
+    - [Task 2: Create a linked service in Azure Synapse Analytics to connect with the Azure Machine Learning workspace](#task-2-create-a-linked-service-in-azure-synapse-analytics-to-connect-with-the-azure-machine-learning-workspace)
+  - [Exercise 2: Ingest data](#exercise-2-ingest-data)
+    - [Task 1: Grant Storage Blob Contributor to the user account](#task-1-grant-storage-blob-contributor-to-the-user-account)
+    - [Task 2: Ingest dataset into a Spark table](#task-2-ingest-dataset-into-a-spark-table)
+  - [Exercise 3: Train a regression model](#exercise-3-train-a-regression-model)
+    - [Task 1: Create new AutoML experiment using the AML Integration with Azure Synapse Analytics](#task-1-create-new-automl-experiment-using-the-aml-integration-with-azure-synapse-analytics)
+    - [Task 2: View details of the experiment run in AML Studio](#task-2-view-details-of-the-experiment-run-in-aml-studio)
+  - [Exercise 4: Consume the trained regression model](#exercise-4-consume-the-trained-regression-model)
+    - [Task 1: Load prospective compute module data](#task-1-load-prospective-compute-module-data)
+    - [Task 2: Enrich research and development SQL table with the trained model](#task-2-enrich-research-and-development-sql-table-with-the-trained-model)
+  - [Conclusion](#conclusion)
+
 ## Lab overview
 
 Azure Synapse Analytics is an enterprise-grade analytics service and a one-stop-shop for all your analytical processing needs. Azure Synapse Analytics combines enterprise data warehousing, industry-leading SQL (both serverless and dedicated), Spark technologies, ETL/ELT pipelines, and deep integrations with other Azure services such as Power BI, Cosmos DB, and Azure ML. All of these integrations and capabilities are made available via a single user interface, Synapse Studio. The focus of this lab is to explore the integration of Azure Machine Learning with Azure Synapse Analytics.
