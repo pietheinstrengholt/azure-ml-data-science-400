@@ -2,7 +2,7 @@
 
 ***Note about this LAB's timing***:
 
-This Lab has been run on a "Standard_DS3_v2 (4 cores, 14 GB RAM, 28 GB disk)" compute target, where some steps, which are are pretty long, has been timed hereunder. Do not hesitate to launch them in advance
+This Lab has been ran on a "Standard_DS3_v2 (4 cores, 14 GB RAM, 28 GB disk)" compute target, where some steps, which are are pretty long, has been timed hereunder. Do not hesitate to launch them in advance
  - LAB04_2_Train_Model.ipynb: Step 2 about training and evaluating models (~6 min.)
  - LAB04_3_Create_Docker_Container_Image_for_Scoring.ipynb: Task 2 - Deploy on managed compute and test live (~20-25 min.)
 
