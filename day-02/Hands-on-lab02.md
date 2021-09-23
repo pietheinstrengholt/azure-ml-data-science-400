@@ -20,7 +20,6 @@
 
 Following this lab you will learn how to create a no-code machine learning pipeline using the AML Designer, and how to publish a single training Pipeline as a web service that client applications can reuse to train multiple models while changing parameters and datasets and for eventual inferencing use on new datasets. Hereunder the global schema of a published pipeline.
 
-To speed up the module selection process you can enter the module's name directly to the Designer's library research box, just make sure you choose the right module.
 
 ## Exercise 1 - Design a Machine Learning pipeline with the Designer
 
@@ -57,6 +56,7 @@ Start by importing and preparing the dataset for the training following the step
 * Go to the Designer's asset library
 * Choose **Data Input and Output**
 * Hover on **Import Data** and click on **Use module**
+  >*Note : To speed up the module selection process you can enter the module's name directly to the Designer's library research box, just make sure you choose the right module.* 
 
 ![Import data](media/Lab02-import-data.png)
 
@@ -64,7 +64,7 @@ Start by importing and preparing the dataset for the training following the step
 * click on **New datastore**
 * On the prompt window enter `sample_datastore` for **Datastore name**
 * Select **enter manually**
-* Copy the following link `https://automlsamplenotebookdata.blob.core.windows.net/automl-sample-notebook-data/` and past it to the **URL** box
+* Copy the following link `https://automlsamplenotebookdata.blob.core.windows.net/automl-sample-notebook-data` and past it to the **URL** box
 * select `No` for **Save credentials with the datastore for data access**
 
 ![create new datastore](media/Lab02-new-datastore.png)
@@ -159,25 +159,25 @@ After creating the pipeline draft using the AML Designer, here you are going to 
 
 ### Task 1 - Set pipeline parameters
 
-Pipeline parameters are used to build versatile pipelines which can be resubmitted later with varying parameter values. Here in this exercise, you are going to set these parameters:
+Pipeline parameters are used to build versatile pipelines which can be resubmitted later with varying parameter values. Here in this exercise, you are going to set these parameters, as follows:
 
 * **Data source** or the training data path, to retrain the model on different datasets
-  * Select **Import Data** module and under **Parameters** tab, mouseover the Path field TO select the *More button*, then click on **Add to pipeline parameter** and save
+  * To add the new parameter, select **Import Data** module and under **Parameters** tab, mouseover the Path field to select the *More button*, then click on **Add to pipeline parameter** and save
 
   ![Add data path to pipeline parameter](media/Lab02-DP-to-PP.png)
 
 * **Fraction of rows** in the training dataset
-  * Select **Split Data** module and add **Fraction of rows in the first output** to pipeline parameters, then save
+  * To add the new parameter, select **Split Data** module and add **Fraction of rows in the first output** to pipeline parameters, then save
 
   ![Add fraction of rows to pipeline parameter](media/Lab02-splitData-PP.png)
 
 * **Number of desired features** to select for training
-  * Select **Filter Based Feature Selection**, add **Number of desired features** to pipeline parameters and save
+  * To add the new parameter, select **Filter Based Feature Selection**, add **Number of desired features** to pipeline parameters and save
 
   ![Number of selected features to pipeline parameter](media/Lab02-feature-selection-PP.png)
 
 * **Number of decision trees** of the **Decision Forest** training algorithm
-  * Select **Two-class Decision Forest**, add **Number of decision trees** to pipeline parameters and save
+  * To add the new parameter, select **Two-class Decision Forest**, add **Number of decision trees** to pipeline parameters and save
 
   ![Number of decision trees to pipeline parameter](media/Lab02-Num-DT-PP.png)
 
@@ -201,9 +201,13 @@ After publish is succeeded go to the pipeline endpoint by clicking on `Two-class
 
 ![Publish pipeline to a REST Endpoint](media/Lab02-go-to-pipeline-endpoint.png)
 
+In case you can't see the notification, you can access the pipeline endpoint directly from **pipelines** under **Pipeline Endpoints** tab, by clicking on `Two-class pipeline`
+
+![Access pipeline endpoint](media/Lab02-access-pipeline-endpoint.png)
+
 Here on the **published pipeline overview** you can find the pipeline REST endpoint properties for further use.
 
-You can test the pipeline directly from this page, just by clicking on **Submit** to submit a new run using new parameter values that you can define in the bottom of the prompt as follows. 
+You can test the pipeline directly from this page, just by clicking on **Submit** to submit a new run using new parameter values that you can define in the bottom of the prompt as follows. Make sure to describe your pipeline run to keep track of different runs' specific parameters.
 
 ![Submit new run from published pipeline](media/Lab02-submit-new-run-using-published-pipeline.png)
 
