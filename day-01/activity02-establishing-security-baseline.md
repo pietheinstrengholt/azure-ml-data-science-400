@@ -26,7 +26,6 @@ For each category, use the scenario prompts to answer the question or explain wh
 
 ### Identity Management
 
-* What steps can a customer take to ensure that only approved employees can access AML resources?
 * What steps can a customer take to reduce the risk of an insufficiently strong password allowing a malicious third party to access AML resources?
 
 ### Privileged Access
@@ -49,16 +48,22 @@ For each category, use the scenario prompts to answer the question or explain wh
 ### Logging and Threat Detection
 
 * What tools could the customer use to perform logging or threat detection against AML resources?
-* What types of information would you recommend the customer log?
+* What types of information would you recommend the customer log to support threat hunting or generation of security alerts?
 * What tooling would you recommend to the customer in order to centralize their log management?
 
 ### Posture and Vulnerability Management
 
 * What can the customer do to limit their risk of accidentally using a malware-infested container image?
-* How can the customer prevent their custom container images from being accessible to the public internet?
 * The data science team would like the authority to create and destroy compute instances on an as-needed basis, but the security team wants to limit the risk of a misconfiguration exposing sensitive data.  What recommendations do you have to reduce this risk?
 
 ### Backup and Recovery
 
+* For the following AML resources, which are geo-replicated by Microsoft, and which would the customer need to geo-replicate?  Describe the process for geo-replication of each resource which would require manual operation for geo-replication.
+
+    1. Machine Learning workspace
+    2. Machine Learning compute
+    3. Key Vault
+    4. Container Registry
+    5. Storage Account
+    6. Application Insights
 * What resources would you recommend the customer build backup policies to protect?
-* What processes would you recommend the customer have in place around backups of AML resources?
