@@ -48,12 +48,16 @@ In this task, you import Jupyter notebooks from GitHub that you will use to comp
 3. In the new Jupyter window, select **New** and then select **Terminal** from the context menu.
 
    ![In the Jupyter notebooks interface, the New dropdown is selected, and Terminal is highlighted in the context menu.](media/jupyter-new-terminal.png "Open new terminal window")
+
+> **Note**: If you see errors when loading terminal, you will have to first run `cd ~/cloudfiles/code/Users/<username>` before proceeding.
   
 4. Run the following commands in order in the terminal window:
 
    - `mkdir ml-labs`
    - `cd ml-labs`
    - `git clone https://github.com/solliancenet/azure-ml-data-science-400.git`
+ 
+   > **Note**: If you have two-factor authentication set up on your GitHub account, you have to use a PAT as the password.
 
    ![In the Jupyter terminal window, the commands listed above are displayed.](media/jupyter-terminal.png "Import repository")
 
