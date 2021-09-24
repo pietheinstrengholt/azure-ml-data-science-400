@@ -56,7 +56,8 @@ In this task, you import Jupyter notebooks from GitHub that you will use to comp
    - `mkdir ml-labs`
    - `cd ml-labs`
    - `git clone https://github.com/solliancenet/azure-ml-data-science-400.git`
- 
+
+
    > **Note**: If you have two-factor authentication set up on your GitHub account, you have to use a PAT as the password.
 
    ![In the Jupyter terminal window, the commands listed above are displayed.](media/jupyter-terminal.png "Import repository")
