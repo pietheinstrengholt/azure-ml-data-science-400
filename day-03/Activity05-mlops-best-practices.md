@@ -1,12 +1,12 @@
 # Activity 05 - MLOps Best Practices
 
-DevOps has become ubiquitous in the world of classical development. Almost all projects that exceed a certain level of complexity become inevitably DevOps projects. Yet, there is one category of projects that are stepping out of the line. You’ve guessed it right, it’s the category of Data Science projects.
+DevOps has become ubiquitous in the world of classical development. Almost all projects that exceed a certain level of complexity inevitably become DevOps projects. There is one category of projects, however, which does not seem to fit that mold. You guessed it: it’s the category of Data Science projects.
 
-When it comes to DevOps, Data Science projects pose a range of unique challenges, whether it’s about the technical side of things, the philosophy of the people involved, or the actors involved. Think about a straightforward example: versioning. While in a “classical” development project, versioning refers almost exclusively to source code, in the world of data science, it gets another vital aspect: data versioning. It’s not enough to know the version of the code for your model, it’s equally important to know the “version” of the data it was trained on. Another interesting question is, for example, what does a “build” mean in the world of data science? Or a “release”?
+When it comes to DevOps, Data Science projects pose a range of unique challenges. These challenges include the technical side of things, the philosophy of the people involved, and even the actors involved. Think about a straightforward example: versioning. In a “classical” development project, versioning refers almost exclusively to source code; in the world of data science, however, we also need to think about data versioning. It’s not enough to know the version of the code for your model, but you also need to know the “version” of the data it was trained on. For further questions along these lines, what does a “build” mean in the world of data science? Or a “release”?
 
-MLOps empowers data scientists and machine learning engineers to bring together their knowledge and skills to simplify the process of going from model development to release/deployment. ML Ops enables you to track, version, test, certify and reuse assets in every part of the machine learning lifecycle and provides orchestration services to streamline managing this lifecycle. This allows practitioners to automate the end-to-end machine learning lifecycle to frequently update models, test new models, and continuously roll out new ML models alongside your other applications and services.
+MLOps empowers data scientists and machine learning engineers to bring together their knowledge and skills to simplify the process of moving from model development to release and deployment. MLOps enables you to track, version, test, certify, and reuse assets in every part of the machine learning lifecycle. Additionally, it provides orchestration services to streamline the management of this lifecycle. This allows practitioners to automate the end-to-end machine learning lifecycle to frequently update models, test new models, and continuously roll out new ML models alongside other applications and services.
 
-In this activity we will aim to discuss together some of the most important MLOps best practices that help addressing the main challenges faced when Data Science projects move into operations.
+In this activity, we will discuss as a team some of the most important MLOps best practices that help addressing the main challenges faced when Data Science projects move into operations.
 
 ## 1. MLOps and traditional DevOps application CI/CD pipelines
 
@@ -32,7 +32,7 @@ The DevOps mindset applied to data science solutions is commonly referred to as 
 
 **Team Challenge 1**
 
-Analyze the complementarity of the two platforms and how they support the following core MLOps concepts:
+Analyze the complementarity of the two platforms and explain how they support the following core MLOps concepts:
 
 - Boards
 - Code repos
