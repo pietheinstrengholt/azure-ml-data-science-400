@@ -52,13 +52,13 @@
     | WORKSPACE_SVC_CONNECTION | `aml-workspace-connection`  | Azure ML Workspace Service Connection name                 |
     | ACI_DEPLOYMENT_NAME      | `mlops-aci`                 | [Azure Container Instances](https://azure.microsoft.com/en-us/services/container-instances/) name                           |                 |
 
-8. Make sure you select the **Open access** option in the **Pipeline permissions** menu for variable group configuration.
-
-    ![Allow access to all pipelines](../../day-03/media/05-devops-allowacces-vargroup.png)
-
-9. Select **Save** from the top menu to create the variable group.
+8. Select **Save** from the top menu to create the variable group.
 
     ![Save the variable group configuration](../../day-03/media/06-devops-save-vargroup.png)
+
+9. Make sure you select the **Open access** option in the **Pipeline permissions** menu for variable group configuration.
+
+    ![Allow access to all pipelines](../../day-03/media/05-devops-allowacces-vargroup.png)
 
 ## Task 2 - Configure the Lab VM as an Azure DevOps Build Agent
 
