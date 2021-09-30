@@ -1,14 +1,13 @@
 # Hands-on-lab: Implementing ML pipelines with the designer
 
   * **Summary**
+
   As you will see, Azure Machine Learning Designer is a very simple tool that can help you get started with training machine learning models without the need of the coding experience, and that's thanks to its no-code visual interface, based on drag-&-drop modules that are already pre-built for direct use. It enables you to pass through all main steps of a machine learning project starting with the data pre-processing, passing by model training, all the way up to the deployment of a production-ready model. You can also perform model updates using the publish functionality, that allows you to use the same pipeline with adjustable parameters that you can update to submit a new run until you're satisfied with the results. For a technically more advanced approach, you can discover the Notebook experience proposed in the next labs.
 
 
 **Table of content**
 
 * [Lab overview](#Lab-overview)
-* [Audiance](#Audiance)
-* [Prerequisites](#Prerequisites)
 * [Exercise 1 - Design a Machine Learning pipeline with the Designer](#Exercise-1---Design-a-Machine-Learning-pipeline-with-the-Designer)
   * [Task 1 - Create the pipeline and select the default compute target](#Task-1---Create-the-pipeline-and-select-the-default-compute-target)
   * [Task 2 - Import and prepare the data](#Task-2---Import-and-prepare-the-data)
@@ -25,21 +24,6 @@
 
 
 Following this lab, you will learn how to create a no-code machine learning pipeline using the AML Designer, and how to publish a single training Pipeline as a web service that client applications can reuse to train multiple models while changing parameters and datasets and for eventual inferencing use on new datasets. 
-
-## Audiance
-
-This lab is designed for newly started data scientists, solution architects, and developers who are curious about creating a machine learning pipeline flow, to build and operate a machine learning solution without the need of specific knowledge of Python or machine learning frameworks.
-
-## Prerequisites
-
-To attend this lab, students must have :
-
-  * Familiarity with Azure 
-  * Fundamental knowledge about machine learning project lifecycle
-  * Basic understanding of model training concepts and steps
-  * Basic understanding of mathematics, such as the ability to interpret model evaluation results
-  * Basic knowledge of concepts of most common machine learning algorithms
-
 
 
 ## Exercise 1 - Design a Machine Learning pipeline with the Designer
