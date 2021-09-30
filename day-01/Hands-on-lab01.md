@@ -5,6 +5,7 @@
 <!-- TOC -->
 
 - [Lab Overview](#lab-overview)
+- [Prerequisites](#prerequisites)
 - [Exercise 1: Training and deploying a model in AML](#exercise-1-training-and-deploying-a-model-in-aml)
    - [Task 1: Open Lab Notebook](#task-1-open-lab-notebook)
    - [Task 2: Execute Notebook](#task-2-execute-notebook)
@@ -14,6 +15,11 @@
 In this lab, we will be using a subset of NYC Taxi & Limousine Commission - green taxi trip records available from [Azure Open Datasets](https://azure.microsoft.com/en-us/services/open-datasets/). The data is enriched with holiday and weather data. We will use data transformations and the GradientBoostingRegressor algorithm from the scikit-learn library to train a regression model to predict taxi fares in New York City based on input features such as, number of passengers, trip distance, datetime, holiday information and weather information.
 
 The primary goal of this lab is to learn how to leverage Azure Machine Learning (AML) to provision compute resources to train machine learning models, and then deploy the trained models either to a managed Azure Container Instance (ACI) or to a containerized platform such as Azure Kubernetes Services (AKS).
+
+## Prerequisites
+
+- Knowledge of Python
+- Knowledge of training machine learning models using frameworks such as [scikit-learn](https://scikit-learn.org/)
 
 ## Exercise 1: Training and deploying a model in AML
 

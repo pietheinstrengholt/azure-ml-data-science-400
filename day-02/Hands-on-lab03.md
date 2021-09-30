@@ -5,6 +5,7 @@
 <!-- TOC -->
 
 - [Lab Overview](#lab-overview)
+- [Prerequisites](#prerequisites)
 - [Exercise 1: Implementing and monitoring a Batch Scoring solution](#exercise-1-implementing-and-monitoring-a-batch-scoring-solution)
    - [Task 1: Open Lab Notebook](#task-1-open-lab-notebook)
    - [Task 2: Execute Notebook](#task-2-execute-notebook)
@@ -19,6 +20,11 @@ In this lab, we will be using [Azure Machine Learning Pipelines](https://docs.mi
 1. **Inference step**: In this step we will use a special type of step called `ParallelRunStep` to do batch scoring on the input data. The `ParallelRunStep` uses a configuration called `ParallelRunConfig` that allows you to control how to break up the scoring job in batches across the available compute nodes and their respective processors. 
 
 Finally, we will also review how to monitor the batch scoring pipeline runs from within Azure Machine Learning Studio.
+
+## Prerequisites
+
+- Knowledge of Python
+- Knowledge of training models using the Azure Machine Learning SDK
 
 ## Exercise 1: Implementing and monitoring a Batch Scoring solution
 
