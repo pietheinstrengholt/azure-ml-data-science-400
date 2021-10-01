@@ -1,20 +1,24 @@
-# LAB 4 - Deploying a real-time scoring endpoint with managed compute
+# Hands-on-lab: Deploying a real-time scoring endpoint with managed compute
 
-***Note about this LAB's timing***:
+Azure Machine Learning Notebooks allows to train and deploy your models with a couple of lines in Python.
 
-This Lab has been ran on a "Standard_DS3_v2 (4 cores, 14 GB RAM, 28 GB disk)" compute target, where some steps, which are are pretty long, has been timed hereunder. Do not hesitate to launch them in advance
- - LAB04_2_Train_Model.ipynb: Step 2 about training and evaluating models (~6 min.)
- - LAB04_3_Create_Docker_Container_Image_for_Scoring.ipynb: Task 2 - Deploy on managed compute and test live (~20-25 min.)
+You can customize the scoring service related to your model just as easily. 
+Choosing batch vs. real-time, choosing the levels of responsiveness, availability, throughput and more, depending on your services needs.
 
-### Table of contents
+After you have seen batch scoring solutions, you will now see an end to end implementation of a real-time scoring solution.
+This includes the deployment of a scoring endpoint on the appropriate compute target.
 
-* [Source dataset used by the lab](#Source-dataset-used-by-the-lab)
-* [Reminder Batch scoring vs. Real-time scoring](#Quick-reminder-about-batch-scoring-(already-seen)-vs.-real-time-scoring)
+### Contents
+
 * [Lab overview](#Lab-overview)
-* [Lab prerequisites](#Lab-prerequisites)
+  * [Source dataset used by the lab: COVID-19 Case Surveillance Public Use Data](#Source-dataset-used-by-the-lab-COVID---19-Case-Surveillance-Public-Use-Data)
+    * [General considerations](#General-considerations)
+    * [Data points description](#Data-points-description)
+  * [Quick reminder Batch scoring vs. Real-time scoring](#Quick-reminder-about-batch-scoring-(already-seen)-vs.-real-time-scoring)
+* [Prerequisites](#Lab-prerequisites)
 * [Exercise 1 - Train a Classifier](#Exercise-1---Train-a-Classifier)
-  * [Task 1 - LAB04_1_Data_Preparation.ipynb](#Task-1---LAB04_1_Data_Preparation.ipynb)
-  * [Task 2 - LAB04_2_Train_Model.ipynb](#Task-2---LAB04_2_Train_Model.ipynb)
+  * [Task 1 - Data_preparation](#Task-1---Data-preparation)
+  * [Task 2 - Train_models](#Task-2---Train-models)
 * [Exercise 2 - Deploy models on managed computed within Docker container images](#Exercise-2---Deploy-models-on-managed-computed-within-Docker-container-images)
   * [Task 1 - Test locally with Local Web service Compute target](#Task-1---Test-locally-with-Local-Web-service-Compute-target)
   * [Task 2 - Deploy on managed compute and test live](#Task-2---Deploy-on-managed-compute-and-test-live)
@@ -22,9 +26,30 @@ This Lab has been ran on a "Standard_DS3_v2 (4 cores, 14 GB RAM, 28 GB disk)" co
   * [task1 - Deploy custom Docker container image with managed compute](#task1---Deploy-custom-Docker-container-image-with-managed-compute)
   * [task2 - Pinning packages versions with requirements.txt](#task2---Pinning-packages-versions-with-requirements.txt)
 
-## Source dataset used by the lab
+## Lab overview
 
-### COVID-19 Case Surveillance Public Use Data
+In this lab you will use the COVID-19 Case Surveillance Public Use Data to make some two-class classification. Your model will attempt to estimates whether or not the patient will survive. Then, not in the lab but if you wish, you may use the probability of this estimation to get an intuition of the level of risk of an infected patient.
+
+. Preparing a model: You will use your current [Azure Machine Learning compute instance](https://docs.microsoft.com/en-us/azure/machine-learning/how-to-create-manage-compute-instance?tabs=python)
+You will do some data exploration and preparation.
+You will use some supervised machine learning algorithms to produce a scoring model.
+
+. Deploying the endpoint for development and tests purposes using your local compute instance.
+Then you will deploy your real-time scoring model, evaluate the model itself, score some data with it, and validate it works (basic testings)
+
+. Deploying the endpoint for real-life usage using the compute instance of your choice.
+
+All the compute resources you will use are fully managed and maintained by the Azure platform, you just have to cherry-pick the appropriate one depending on your performance needs vs. costs.
+
+*The functional purpose of this lab*: During the COVID-19 pandemic, a key question has been to understand which patients were the most at risk. Evaluating the risk may help for instance to give a priority to vaccination access. It can also helps you to determine which patient should be monitored in an hospital room, and which patient can self monitor at home. In this lab, depending on some parameters that are easy to access, you would be able to evaluate the risk for a patient as soon as he presents himself in a laboratory.
+
+***Note about this LAB's timing***:
+
+This Lab has been ran on a "Standard_DS3_v2 (4 cores, 14 GB RAM, 28 GB disk)" compute target, where some steps, which are are pretty long, has been timed hereunder. Do not hesitate to launch them in advance
+ - Training and evaluating models (~6 min.)
+ - The "Deploy on managed compute and test live" part of the Notebook (~20-25 min.)
+
+### Source dataset used by the lab: COVID-19 Case Surveillance Public Use Data
 
 #### General considerations
 
@@ -53,14 +78,15 @@ The dataset contains 13.4 million rows of deidentified patient data (more than 3
 | **death_yn**  	| Did the patient die as a result of this illness? 	| Case Report Form 	| [Yes - No - Unknown - Missing] 	| Character 	|  	|
 | **medcond_yn**  	| Pre-existing medical conditions? 	| Case Report Form 	| [Yes - No - Unknown - Missing] 	| Character 	|  	|
 
-## Quick reminder about batch scoring (already seen) vs. real-time scoring
+### Quick reminder about batch scoring (already seen) vs. real-time scoring
 
 Once your models are trained, there are two main ways you can deploy them in order to score some new data: Batch and real-time deployment.
-Scoring data means for instance: assign new data to a class, estimate or forecast some values based on new data.
 
-. Batch scoring means that you will collect a batch of data across a periodic time schedule you defined, and then, on a regular basis, score all the data collected in the batch, and deliver the results of this scoring.
+Scoring a new data point means: assign this data point to a class, or estimate / forecast a value depending on this new data point.
 
-. On the other hand, real-time scoring means that you will score new data when they come in.
+- Batch scoring means that you will collect a batch of data across a periodic time schedule you defined, and then, on a regular basis, score all the data collected in the batch, and deliver the results of this scoring.
+
+- On the other hand, real-time scoring means that you will score new data when they come in.
 
 Both of those methods have pros and cons. After LAB03 and LAB04, you will be able to identify when to choose batch scoring vs. real-time scoring.
 
@@ -69,53 +95,34 @@ More specifically in this lab, you will learn what is a real-time scoring soluti
 For the Batch scoring solution, you need to build ML pipelines you have seen on LAB02.
 
 The batch inferencing, or batch scoring method, is the most usual in the real-life usages.
-So why choosing batch over real-time:
+So why choosing **batch over real-time**:
 
- . The costs: On the cloud, you pay depending on your usage of ressources. In the batch scoring scenario, you switch on the compte target used to score the data only when you need it. So you avoid the cost of a 24/7 up and running machine.
+ . *The costs*: On the cloud, you pay depending on your usage of ressources. In the batch scoring scenario, you switch on the compte target used to score the data only when you need it. So you avoid the cost of a 24/7 up and running machine.
 
-. Genericity: Using the pipelines patterns, batch scoring is more generic and so more re-usable/replicable than a real-time solution.
+. *Genericity*: Using the pipelines patterns, batch scoring is more generic and so more re-usable/replicable than a real-time solution.
 
-. Simplicity: While Batch inferencing simply deals with data loaded on your Azure datastore, and then send the results to another storage, real-time endpoints can be accessed by any type of program or application, that's why you often have to bring some more customizations into them.
+. *Simplicity*: While Batch inferencing simply deals with data loaded on your Azure datastore, and then send the results to another storage, real-time endpoints can be accessed by any type of program or application, that's why you often have to bring some more customizations into them.
 
 For the real-time scoring solution, you will build scoring endpoints hosted on the Compute Target of your choice.
 
-Real-time inferencing is usualy more expensive and more complex to operate. But they are a must have for many real life use cases, for instance:
+**Real-time inferencing** is usualy more expensive and more complex to operate. But they are a must have for many real life use cases, for instance:
 
-. Online products recommendations
+- Online products recommendations
 
-. Online moderation
+- Online moderation
 
-. Fraud detection
+- Fraud detection
 
-. Predictive maintenance of industrial assets
+- Predictive maintenance of industrial assets
 
-## Lab overview
+## Prerequisites
 
-In this lab you will use the COVID-19 Case Surveillance Public Use Data to make some two-class classifications, to see if the model estimates
-if yes or not the patient will survive. Then, not in the lab but if you wish, you will use the probability of this estimation to get an intuition of the level of risk of an infected patient.
-
-. Preparing a model: You will use your current [Azure Machine Learning compute instance](https://docs.microsoft.com/en-us/azure/machine-learning/how-to-create-manage-compute-instance?tabs=python)
-You will do some data exploration and preparation.
-You will use some supervised machine learning algorithms to produce a scoring model.
-
-. Deploying the endpoint for development and tests purposes using your local compute instance.
-Then you will deploy your real-time scoring model, evaluate the model itself, score some data with it, and validate it works (basic testings)
-
-. Deploying the endpoint for real-life usage using the compute instance of your choice.
-
-All the compute resources you will use are fully managed and maintained by the Azure platform, you just have to cherry-pick the appropriate one depending on your performance needs vs. costs.
-
-In the following exercises, you will train a Machine Learning model, create a Docker container image to score (i.e. evaluate) your model then deploy this container image with a managed compute resource, test your scoring endpoint to start using your model for real, then monitor it to constantly check it's still running accurately and see if there is a need to retrain it.
-
-*The functional purpose of this lab*: During the COVID-19 pandemic, a key question has been to understand which patients were the most at risk, for instance to give some priority to vaccination access or to more or less close symptoms monitoring. In this lab, depending on some parameters that are easy to access, you would be able to evaluate the risk for a patient as soon as he presents himself in a laboratory.
-
-## Lab prerequisites
-
-A Workspace on Azure Machine Learning, and a Compute target up and running, but you should have at least one from former labs.
+ - Knowledge of Python
+ - Knowledge of machine learning algorithms
 
 ## Exercise 1 - Train a Classifier
 
-### Task 1 - LAB04_1_Data_Preparation.ipynb
+### Task 1 - Data preparation
 
 First, you want to explore the data to understand them and maybe prepare them so that a machine can have optimal exploitation of your data in the context of the defined purpose.
 
@@ -131,26 +138,21 @@ Once on the studio home page, click on Notebooks.
 
 ![Azure Machine Learning Studio Home Page Notebooks](media/LAB04-03-Studio-Home-Page.png)
 
-Open the notebook "LAB04_1_Data_Preparation_COVID-19-Case-Surveillance-Public-Use-Data.ipynb" in the folder "LAB04".
-
+Now open the Notebook "Lab04 - Deploying a real-time scoring endpoint with managed compute.ipynb".
 You can observe that you are asked to choose (and start if not started) a compute. We will choose for data preparation and model training an [Azure Machine Learning compute instance](https://docs.microsoft.com/en-us/azure/machine-learning/how-to-create-manage-compute-instance?tabs=python) as it is simple, low cost and big enough for the curent purpose.
 
-![LAB04 Data preparation Notebook](media/LAB04-04-Choose-a-compute-for-data-preparation.png)
+![LAB04 Choose a compute target](media/LAB04-04-Choose-a-compute-for-data-preparation.png)
 
 *Note*: If you do not have a compute target defined, please advise your instructor.
 
-Open the data preparation Notebook "LAB04_1_Data_Preparation_COVID-19-Case-Surveillance-Public-Use-Data.ipynb".
+Now execute the file cell by cell untill task 2.
 
 ![LAB04 Data preparation Notebook](media/LAB04-05-Data-preparation-Notebook.png)
 
-Now execute the file cell by cell.
-
-### Task 2 - LAB04_2_Train_Model.ipynb
-
-Open the notebook "Train_Model.ipynb" and execute cell by cell.
+### Task 2 - Train models
 
 From a more functional point of view, in these pandemic conditions, you will have to balance between:
-- On the one hand be careful to not miss to put under surveillance a patient at risk, even though this means you will monitor a bit more people than necessary, because someone's life is involved.
+- On the one hand be careful to not miss to moitoring a patient at risk, even though this means you will monitor a bit more people than necessary, because someone's life is involved.
  This part of the "equation" is favored by the Recall (how many - which proportion - of pertinent elements has been selected)
 - But on another hand, be careful to avoid to over-monitor, to not provoke a saturation of your medical services, because in that case too, you put some people's lives at risk.
 This part of the "equation" is favored by the Precision (how many - which proportion - of selected elements are pertinent)
@@ -161,9 +163,9 @@ To compare models, we will:
 
 . Remind that we want to be balanced between precision and recall
 
-So we will use the F1-score (weighted average between our two relatively balanced classes) to choose our "best" model, and the F1 given by the sklearn metrics we used in the Notebook takes by default a good balance between precision and recall.
-And as this metric is the same for some of the models, and as the F1-score is applicable on any point of the ROC curve, then we will look at the AUC (area under the ROC curve) and take the biggest AUC, sort of generalization of the F1 for all precision/recall threshold values.
-And as even in that case there are still some equal models, we will choose, among the best scoring models, the one which is the easiest to maintain and/or update, or the easiest to debug, or the easiest to train, depending on your purposes. In our case the "Decision Tree" (more simple model than Random Forest but with the same score. On the long run, with more data or more variable in the future, the Random Forest could manage more complex models so could have been a better choice, anyway, not exactly the point of this lab)
+So we will use the F1-score (weighted average between our two relatively balanced classes) to choose our "best" model. The F1 is given by the sklearn metrics we used in the Notebook takes by default a good balance between precision and recall.
+As this metric is the same for some of the models, and as the F1-score is applicable on any point of the ROC curve, then we will look at the AUC (area under the ROC curve) and take the biggest AUC, sort of generalization of the F1 for all precision/recall threshold values.
+And as even in that case there are still some equal models, we will choose, among the best scoring models, the one which is the easiest to maintain and/or update, or the easiest to debug, or the easiest to train, depending on your purposes. In our case we will choose the "Decision Tree" because it is more simple than the Random Forest with the same score. Simplicity has advantages, but on the long run, with more data or more variable comming in, the Random Forest could have managed more complex models, so may have been a better choice.
 
 Then we will plot for this model the ROC curve. Moving along the ROC curve plotted you can also decide acceptable thresholds between Precision and Recall. The recall will let you know how many patients you accept to put at risk by missing their vulnerability to the virus, and will also let you calculate for which recall threshold you will reach saturation of your intensive care services.
 
@@ -193,13 +195,15 @@ Now you have your model, having it into production, especially in the proper env
 
 In this exercise you will use MS Prebuilt images environments and add some dependencies (using CondaDependencies()), to customize a bit and ensure some stable reproducible environments. This could already cover most of your needs.
 
-In this exercise you will use the Notebook "LAB04_3_Create_Docker_Container_Image_for_Scoring.ipynb".
+You will also have to choose on [which compute](https://docs.microsoft.com/en-us/azure/machine-learning/how-to-deploy-and-where?tabs=azcli#choose-a-compute-target) make your deployments.
 
 ### Task 1 - Test locally with Local Web service Compute target
 
 While your development is in progress, you may want to deploy often and quickly for continuous testing purposes to validate your models before live / production deployment.
 
 You can in that case choose the [Local Web service Compute target](https://docs.microsoft.com/en-us/azure/machine-learning/how-to-deploy-local-container-notebook-vm), i.e. your current Compute Instance.
+
+You can easily modify your model, re-deploy and test on your own, to efficiently iterate during the development process. Also, with the [`Environments`](https://docs.microsoft.com/en-us/azure/machine-learning/concept-environments) provided by Azure ML, and that Azure ML allows you to customize, you can deploy and test within reproductible contexts, ISO environment with the other developers of your team.
 
 After registering your model, you will need a scoring script for testings purposes.
 
@@ -219,7 +223,7 @@ Now you are fine with your model, you want to deploy it on production so that th
 
 The recommended Compute targets for this are [Azure Kubernetes Service (AKS)](https://docs.microsoft.com/en-us/azure/machine-learning/how-to-deploy-azure-kubernetes-service?tabs=python) (AKS) for high-scale production deployments, or [Azure Container Instances](https://docs.microsoft.com/en-us/azure/machine-learning/how-to-deploy-azure-container-instance) (ACI) for low-scale scenarios.
 
-We will choose AKS. When the deployment is done with the Python Notebook, you can observe your endpoint and its settings.
+We want to deploy some real-time scoring solutions. Machines have to be up-and-running 24/7 and give immediate responses. So will choose AKS. When the deployment is done with the Python Notebook, you can observe your endpoint and its settings.
 
 ![Real time endpoint dasboard](media/LAB04-09-Real-time-endpoints.png)
 
@@ -244,8 +248,6 @@ As there is a cost of having an up and running service, you can stop it when nee
 *Note* that **if you already have an AKS cluster in your Azure subscription**, you can [attach it to your workspace](https://docs.microsoft.com/en-us/azure/machine-learning/how-to-create-attach-kubernetes?tabs=python#attach-an-existing-aks-cluster) to use it.
 
 ## Exercise 3 - Deploy custom Docker container image with managed compute
-
-Moving forward on the Notebook "LAB04_3_Create_Docker_Container_Image_for_Scoring.ipynb".
 
 ### Task 1 - Deploy custom Docker container image with managed compute
 
