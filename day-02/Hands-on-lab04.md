@@ -8,6 +8,29 @@ Choosing batch vs. real-time, choosing the levels of responsiveness, availabilit
 After you have seen batch scoring solutions, you will now see an end to end implementation of a real-time scoring solution.
 This includes the deployment of a scoring endpoint on the appropriate compute target.
 
+For a real-time solution, very often, you will need to deploy it on some 24/7 up and running compute instance properly dimensioned. So you will need to choose carefully on which compute to deploy.
+
+*To illustrate this*, in this lab we will:
+
+ . **Train** a model
+
+ . **Test** this model with a local deployment
+
+ . **Deploy** your model.
+
+
+ *More specifically, the deployment part of this Lab will cover*:
+- The notion of Azure ML `Environments`, that allows to deploy on:
+    - 1. Reproductible contexts.
+    - 2. Customizable contexts.
+        - Via custom Docker images
+        - Via a requirement.txt file
+- [Which compute](https://docs.microsoft.com/en-us/azure/machine-learning/how-to-deploy-and-where?tabs=azcli#choose-a-compute-target) depending on the purpose of your deployment
+    - Local deployment for development purposes.
+    - Deployment on scalable environments, as we are setting here a real-time service endpoint, so that your model can be used remotely, and respond immediately
+
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
 ### Contents
 
 * [Lab overview](#Lab-overview)
