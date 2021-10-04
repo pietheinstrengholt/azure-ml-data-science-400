@@ -16,7 +16,7 @@ For a real-time solution, very often, you will need to deploy it on some 24/7 up
 
  . **Test** this model with a local deployment
 
- . **Deploy** your model.
+ . **Deploy** your model for real-life scenario.
 
 
  *More specifically, the deployment part of this Lab will cover*:
