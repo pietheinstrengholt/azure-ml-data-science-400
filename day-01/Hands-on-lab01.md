@@ -4,11 +4,12 @@
 
 <!-- TOC -->
 
-- [Lab Overview](#lab-overview)
-- [Prerequisites](#prerequisites)
-- [Exercise 1: Training and deploying a model in AML](#exercise-1-training-and-deploying-a-model-in-aml)
-   - [Task 1: Open Lab Notebook](#task-1-open-lab-notebook)
-   - [Task 2: Execute Notebook](#task-2-execute-notebook)
+- [Hands-on lab: Training and deploying a model in AML](#hands-on-lab-training-and-deploying-a-model-in-aml)
+  - [Lab Overview](#lab-overview)
+  - [Prerequisites](#prerequisites)
+  - [Exercise 1: Training and deploying a model in AML](#exercise-1-training-and-deploying-a-model-in-aml)
+    - [Task 1: Open Lab Notebook](#task-1-open-lab-notebook)
+    - [Task 2: Execute Notebook](#task-2-execute-notebook)
 
 ## Lab Overview
 
@@ -29,17 +30,17 @@ The primary goal of this lab is to learn how to leverage Azure Machine Learning 
 
    ![The Launch studio button is highlighted on the Machine Learning blade.](media/machine-learning-launch-studio.png "Launch Azure Machine Learning studio")
 
-1. From within Azure Machine Learning studio navigate to **Compute, Compute instances**, and then select **Jupyter** link to open Jupyter Notebooks interface for the compute instance **ml-bootcamp-SUFFIX**.
+2. From within Azure Machine Learning studio navigate to **Compute, Compute instances**, and then select **Jupyter** link to open Jupyter Notebooks interface for the compute instance **ml-bootcamp-SUFFIX**.
 
    ![The Jupyter link is highlighted next to the ml-bootcamp-SUFFIX compute instance.](media/ml-workspace-compute-instances.png "Compute instances")
 
-1. Check **Yes, I understand** and select **Continue** in the trusted code dialog.
+3. Check **Yes, I understand** and select **Continue** in the trusted code dialog.
 
    ![In the Always use trusted code dialog, Yes, I understand is checked, and the continue button is highlighted.](media/trusted-code-dialog.png "Always use trusted code")
 
-1. From within Jupyter Notebooks interface navigate to `ml-labs/azure-ml-data-science-400/day-01/notebooks`.
+4. From within Jupyter Notebooks interface navigate to `ml-labs/azure-ml-data-science-400/day-01/notebooks`.
 
-1. Open `Lab01 - Training and deploying a model in AML`. This is the Python notebook you will step through executing in this lab.
+5. Open `Lab01 - Training and deploying a model in AML`. This is the Python notebook you will step through executing in this lab.
 
 ### Task 2: Execute Notebook
 
