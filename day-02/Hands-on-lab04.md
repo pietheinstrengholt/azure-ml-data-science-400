@@ -42,7 +42,7 @@ For a real-time solution, very often, you will need to deploy it on some 24/7 up
 * [Exercise 1 - Train a Classifier](#Exercise-1---Train-a-Classifier)
   * [Task 1 - Data_preparation](#Task-1---Data-preparation)
   * [Task 2 - Train_models](#Task-2---Train-models)
-* [Exercise 2 - Deploy models on managed computed within Docker container images](#Exercise-2---Deploy-models-on-managed-computed-within-Docker-container-images)
+* [Exercise 2 - Deploy models on managed computed within prebuilt Docker container images](#Exercise-2---Deploy-models-on-managed-computed-within-prebuilt-Docker-container-images)
   * [Task 1 - Test locally with Local Web service Compute target](#Task-1---Test-locally-with-Local-Web-service-Compute-target)
   * [Task 2 - Deploy on managed compute and test live](#Task-2---Deploy-on-managed-compute-and-test-live)
 * [Exercise 3 - Deploy custom Docker container image with managed compute](#Exercise-3---Deploy-custom-Docker-container-image-with-managed-compute)
@@ -70,7 +70,7 @@ All the compute resources you will use are fully managed and maintained by the A
 
 This Lab has been ran on a "Standard_DS3_v2 (4 cores, 14 GB RAM, 28 GB disk)" compute target, where some steps, which are are pretty long, has been timed hereunder. Do not hesitate to launch them in advance
  - Training and evaluating models (~6 min.)
- - The "Deploy on managed compute and test live" part of the Notebook (~20-25 min.)
+ - The "Deploy on managed compute and test live" part of the Notebook (~10 to 25 min.)
 
 ### Source dataset used by the lab: COVID-19 Case Surveillance Public Use Data
 
@@ -212,11 +212,11 @@ In the further exercises, we will use Notebooks to deploy your model and use it 
 
 ![Real-time endpoint for scoring 7](media/LAB04-15-Real-time-end-point-interface-deployment-7.png)
 
-## Exercise 2 - Deploy models on managed computed within Docker container images
+## Exercise 2 - Deploy models on managed computed within prebuilt Docker container images
 
 Now you have your model, having it into production, especially in the proper environment is key. You need some dependencies, Python packages, and so on.
 
-In this exercise you will use MS Prebuilt images environments and add some dependencies (using CondaDependencies()), to customize a bit and ensure some stable reproducible environments. This could already cover most of your needs.
+In this exercise you will use [Azure ML Prebuilt Docker images](https://docs.microsoft.com/en-us/azure/machine-learning/concept-prebuilt-docker-images-inference) environments and add some dependencies (using CondaDependencies()), to customize a bit and ensure some stable reproducible environments. This could already cover most of your needs.
 
 You will also have to choose on [which compute](https://docs.microsoft.com/en-us/azure/machine-learning/how-to-deploy-and-where?tabs=azcli#choose-a-compute-target) make your deployments.
 
@@ -225,6 +225,10 @@ You will also have to choose on [which compute](https://docs.microsoft.com/en-us
 While your development is in progress, you may want to deploy often and quickly for continuous testing purposes to validate your models before live / production deployment.
 
 You can in that case choose the [Local Web service Compute target](https://docs.microsoft.com/en-us/azure/machine-learning/how-to-deploy-local-container-notebook-vm), i.e. your current Compute Instance.
+
+You can observe after creating the deployment `Environment` that by default, Azure ML used a predefined Docker image.
+
+![Environment Docker Image](media/LAB04-17-Environment-Docker-Image.png)
 
 You can easily modify your model, re-deploy and test on your own, to efficiently iterate during the development process. Also, with the [`Environments`](https://docs.microsoft.com/en-us/azure/machine-learning/concept-environments) provided by Azure ML, and that Azure ML allows you to customize, you can deploy and test within reproductible contexts, ISO environment with the other developers of your team.
 
@@ -280,7 +284,7 @@ In this exercise, the principle is the same as before but now you will build you
 
 Then you will deploy locally as it goes faster to test your custom environment works fine with your Web Service.
 
-*Note* that you now can use the custom container you have just created within the context of your workspace and environment. But if you want to store and manage your custom Docker containers - for instance using push and pull Docker commands to store them then get them back, you will have to use a new resource: the [Azure container registry](https://docs.microsoft.com/en-us/azure/container-registry/container-registry-get-started-portal).
+*Note* that you now can use the custom container you have just created within the context of your `Workspace` and `Environment`. But if you want to store and manage your custom Docker containers - for instance using push and pull Docker commands to store them then get them back, you will have to use a new resource: the [Azure container registry](https://docs.microsoft.com/en-us/azure/container-registry/container-registry-get-started-portal).
 
 ### Task 2 - Pinning packages versions with requirements.txt
 
