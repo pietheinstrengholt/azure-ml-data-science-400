@@ -25,9 +25,9 @@ Sensitive and confidential information about individuals is extensively used and
 Pioneered by Microsoft Research and their collaborators, Differential Privacy is the gold standard for protecting individuals' data in applications like preparing and publishing statistical analyses. Differential Privacy provides a mathematically measurable privacy guarantee to individual data subjects. It offers significantly higher privacy levels than commonly used disclosure limitation practices like data anonymization. The latter increasingly shows vulnerability to re-identification attacks – especially as more data about individuals become publicly available.
 
 >**NOTE**
-> The content of this lab allows you to follow on the process of applying differential privacy without having in-depth knowlege about its inner workings. The learn more about Differential Privacy and the SmartNoise SDK, see these resources:
+> The content of this lab allows you to follow on the process of applying differential privacy without having in-depth knowlege about its inner workings. To learn more about Differential Privacy and the SmartNoise SDK, see these resources:
 > - The [SmartNoise SDK GitHub repository](https://github.com/opendp/smartnoise-sdk).
-> - The [Microsoft SmartNoise Differrential Privacy Machine Learning Case Studies](https://azure.microsoft.com/en-us/resources/microsoft-smartnoisedifferential-privacy-machine-learning-case-studies/) whitepaper from Microsoft.
+> - The [Microsoft SmartNoise Differential Privacy Machine Learning Case Studies](https://azure.microsoft.com/en-us/resources/microsoft-smartnoisedifferential-privacy-machine-learning-case-studies/) whitepaper from Microsoft.
 > - The [Differential Privacy for Everyone](https://download.microsoft.com/download/D/1/F/D1F0DFF5-8BA9-4BDF-8924-7816932F6825/Differential_Privacy_for_Everyone.pdf) whitepaper from Microsoft.
 
 ### Task 1: Identify location of lab notebooks
@@ -36,7 +36,7 @@ Pioneered by Microsoft Research and their collaborators, Differential Privacy is
 
    ![The Launch studio button is highlighted on the Machine Learning blade.](media/machine-learning-launch-studio.png "Launch Azure Machine Learning studio")
 
-2. From within Azure Machine Learning studio navigate to **Compute, Compute instances**, and then select **Jupyter** link to open Jupyter Notebooks interface for the compute instance **ml-bootcamp-SUFFIX**.
+2. From within Azure Machine Learning studio navigate to **Compute, Compute instances**, select the compute instance **ml-bootcamp-SUFFIX** and make sure it is running otherwise click start, then select **Jupyter** link to open Jupyter Notebooks interface.
 
    ![The Jupyter link is highlighted next to the ml-bootcamp-SUFFIX compute instance.](media/ml-workspace-compute-instances.png "Compute instances")
 
