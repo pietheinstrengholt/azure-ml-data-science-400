@@ -1,6 +1,6 @@
-# Lab 05 - Data labeling and data preparation
+# Lab 05 - Data preparation and monitoring
 
-- [Lab 05 - Data labeling and data preparation](#lab-05---data-labeling-and-data-preparation)
+- [Lab 05 - Data preparation and monitoring](#lab-05---data-preparation-and-monitoring)
   - [Lab overview](#lab-overview)
   - [Exercise 1: Protect privacy with the SmartNoise SDK](#exercise-1-protect-privacy-with-the-smartnoise-sdk)
     - [Task 1: Identify location of lab notebooks](#task-1-identify-location-of-lab-notebooks)
@@ -15,7 +15,6 @@
 In this lab you will perform three core Azure Machine Learning data workloads:
 
 - Protect privacy with the SmartNoise SDK
-- Labeling data with a labeling project
 - Monitoring model performance with data drift
 
 ## Exercise 1: Protect privacy with the SmartNoise SDK
