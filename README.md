@@ -2,7 +2,7 @@
 
 Welcome to the Azure Machine Learning and Data Science Level 400 Bootcamp!
 
-This bootcamp spans over three days of activities including presentations, hands-on labs activities (Menitmeter and group discussion ones)
+This bootcamp spans over three days of activities including presentations, hands-on labs, and activities ([Menitmeter](https://menti.com) and group discussion ones)
 
 ## Day 1
 
