@@ -35,6 +35,7 @@ The bootcamp is addressed to the following technical audiences:
 The bootcamp covers the following Azure platforms and services:
 
 - [Azure Machine Learning](https://docs.microsoft.com/EN-US/azure/machine-learning/overview-what-is-azure-machine-learning)
+- [Azure CLI](https://docs.microsoft.com/en-us/cli/azure/)
 - [Azure Synapse Analytics](https://docs.microsoft.com/en-us/azure/synapse-analytics/overview-what-is)
 - [Azure Databricks](https://docs.microsoft.com/en-us/azure/databricks/scenarios/what-is-azure-databricks)
 - [Azure DevOps and Azure Pipelines](https://docs.microsoft.com/en-us/azure/devops/user-guide/what-is-azure-devops?view=azure-devops)
