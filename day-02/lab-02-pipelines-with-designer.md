@@ -37,19 +37,20 @@ In Azure machine learning select Designer, to start with a new ML pipeline choos
 ![Create a new no-code pipeline](media/Lab02-create-new-designer-pipeline.png)
 
 
-Select a compute target to run the pipeline.
+Select a compute target to run the pipeline. From **Select compute type** shoose **Compute cluster**.
 
 ![select a compute target](media/Lab02-set-compute-target.png)
 
 
-Using the prompted canvas, select a compute target if already exists, otherwise create a new one with the recommended configuration as follows.
+Then, select a compute cluster from **Azure ML compute cluster** if already exists, otherwise select **Create Azure ML compute cluster** to create a new one with the recommended configuration. using the prompted canvas, click next, name the compute cluster and click create to finish.
 
 
 ![create a new compute target](media/Lab02-create-compute-target.png)
 
 
-Once created you can click on save to use the new compute target. 
+Once created you can select it from **Azure ML compute cluster** to use the new compute cluster. 
 
+![create a new compute target](media/Lab02-select-compute-cluster.png)
 
 ### Task 2 - Import and prepare the data
 
