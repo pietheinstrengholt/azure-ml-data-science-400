@@ -33,21 +33,23 @@ For a real-time solution, very often, you will need to deploy it on some 24/7 up
 
 ### Contents
 
-* [Lab overview](#Lab-overview)
-  * [Source dataset used by the lab: COVID-19 Case Surveillance Public Use Data](#Source-dataset-used-by-the-lab-COVID---19-Case-Surveillance-Public-Use-Data)
-    * [General considerations](#General-considerations)
-    * [Data points description](#Data-points-description)
-  * [Quick reminder Batch scoring vs. Real-time scoring](#Quick-reminder-about-batch-scoring-(already-seen)-vs.-real-time-scoring)
-* [Prerequisites](#Lab-prerequisites)
-* [Exercise 1 - Train a Classifier](#Exercise-1---Train-a-Classifier)
-  * [Task 1 - Data_preparation](#Task-1---Data-preparation)
-  * [Task 2 - Train_models](#Task-2---Train-models)
-* [Exercise 2 - Deploy models on managed computed within prebuilt Docker container images](#Exercise-2---Deploy-models-on-managed-computed-within-prebuilt-Docker-container-images)
-  * [Task 1 - Test locally with Local Web service Compute target](#Task-1---Test-locally-with-Local-Web-service-Compute-target)
-  * [Task 2 - Deploy on managed compute and test live](#Task-2---Deploy-on-managed-compute-and-test-live)
-* [Exercise 3 - Deploy custom Docker container image with managed compute](#Exercise-3---Deploy-custom-Docker-container-image-with-managed-compute)
-  * [task1 - Deploy custom Docker container image with managed compute](#task1---Deploy-custom-Docker-container-image-with-managed-compute)
-  * [task2 - Pinning packages versions with requirements.txt](#task2---Pinning-packages-versions-with-requirements.txt)
+- [Hands-on-lab: Deploying a real-time scoring endpoint with managed compute](#hands-on-lab-deploying-a-real-time-scoring-endpoint-with-managed-compute)
+    - [Contents](#contents)
+  - [Lab overview](#lab-overview)
+    - [Source dataset used by the lab: COVID-19 Case Surveillance Public Use Data](#source-dataset-used-by-the-lab-covid-19-case-surveillance-public-use-data)
+      - [General considerations](#general-considerations)
+      - [Data points description](#data-points-description)
+    - [Quick reminder about batch scoring (already seen) vs. real-time scoring](#quick-reminder-about-batch-scoring-already-seen-vs-real-time-scoring)
+  - [Prerequisites](#prerequisites)
+  - [Exercise 1 - Train a Classifier](#exercise-1---train-a-classifier)
+    - [Task 1 - Data preparation](#task-1---data-preparation)
+    - [Task 2 - Train models](#task-2---train-models)
+  - [Exercise 2 - Deploy models on managed computed within prebuilt Docker container images](#exercise-2---deploy-models-on-managed-computed-within-prebuilt-docker-container-images)
+    - [Task 1 - Test locally with Local Web service Compute target](#task-1---test-locally-with-local-web-service-compute-target)
+    - [Task 2 - Deploy on managed compute and test live](#task-2---deploy-on-managed-compute-and-test-live)
+  - [Exercise 3 - Deploy custom Docker container image with managed compute](#exercise-3---deploy-custom-docker-container-image-with-managed-compute)
+    - [Task 1 - Deploy custom Docker container image with managed compute](#task-1---deploy-custom-docker-container-image-with-managed-compute)
+    - [Task 2 - Pinning packages versions with requirements.txt](#task-2---pinning-packages-versions-with-requirementstxt)
 
 ## Lab overview
 
@@ -161,7 +163,7 @@ Once on the studio home page, click on Notebooks.
 
 ![Azure Machine Learning Studio Home Page Notebooks](media/LAB04-03-Studio-Home-Page.png)
 
-Now open the Notebook "Lab04 - Deploying a real-time scoring endpoint with managed compute.ipynb".
+Now open the Notebook "Lab04 - Deploying a real-time scoring endpoint with managed compute.ipynb" (located under the `users/odl_user_xxxxxx/day-02/notebooks` path).
 You can observe that you are asked to choose (and start if not started) a compute. We will choose for data preparation and model training an [Azure Machine Learning compute instance](https://docs.microsoft.com/en-us/azure/machine-learning/how-to-create-manage-compute-instance?tabs=python) as it is simple, low cost and big enough for the curent purpose.
 
 ![LAB04 Choose a compute target](media/LAB04-04-Choose-a-compute-for-data-preparation.png)

@@ -4,10 +4,11 @@
 
 <!-- TOC -->
 
-- [Lab Setup](#lab-setup)
-   - [Task 1: Create a Compute Instance](#task-1-create-a-compute-instance)
-   - [Task 2: Import the Lab Notebooks](#task-2-import-the-lab-notebooks)
-- [Additional Lab Requirements](#additional-lab-requirements)
+- [Setup Lab 03](#setup-lab-03)
+  - [Lab Setup](#lab-setup)
+    - [Task 1: Create a Compute Instance](#task-1-create-a-compute-instance)
+    - [Task 2: Import the Lab Notebooks](#task-2-import-the-lab-notebooks)
+  - [Additional Lab Requirements](#additional-lab-requirements)
 
 ## Lab Setup
 
@@ -37,30 +38,19 @@ In this task, you add a compute resource to your Azure Machine Learning workspac
 
 In this task, you import Jupyter notebooks from GitHub that you will use to complete the exercises in this hands-on lab.
 
-1. From within Azure Machine Learning studio navigate to **Compute, Compute instances**, and then select **Jupyter** link to open Jupyter Notebooks interface for the compute instance **ml-bootcamp-SUFFIX**.
+1. In the storage account associated with the Azure Machine Learning workspace, identify the `code` file share (it's the one named `code-xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx`).
 
-   ![The Jupyter link is highlighted next to the ml-bootcamp-SUFFIX compute instance.](media/ml-workspace-compute-instances.png "Compute instances")
+   ![Code file share location](media/file-share.png)
 
-2. Check **Yes, I understand** and select **Continue** in the trusted code dialog.
+2. Ensure the file share contains a folder named `Users`. Inside that folder, ensure there exists a folder named `odl_user_xxxxxx`.
 
-   ![In the Always use trusted code dialog, Yes, I understand is checked, and the continue button is highlighted.](media/trusted-code-dialog.png "Always use trusted code")
+3. Inside the `odl_user_xxxxxx` folder, create a folder named `day-02`.
 
-3. In the new Jupyter window, select **New** and then select **Terminal** from the context menu.
+4. Inside the `day-02` folder, copy the entire contents of the `notebooks` folder found under the `day-02` folder in the GitHub repo.
 
-   ![In the Jupyter notebooks interface, the New dropdown is selected, and Terminal is highlighted in the context menu.](media/jupyter-new-terminal.png "Open new terminal window")
+   The final folder structure must be the following:
 
-> **Note**: If you see errors when loading terminal, you will have to first run `cd ~/cloudfiles/code/Users/<username>` before proceeding.
-  
-4. Run the following commands in order in the terminal window:
-
-   - `mkdir ml-labs`
-   - `cd ml-labs`
-   - `git clone https://github.com/solliancenet/azure-ml-data-science-400.git`
-   - **Note**: If you have two-factor authentication set up on your GitHub account, you have to use a PAT as the password.
-
-   ![In the Jupyter terminal window, the commands listed above are displayed.](media/jupyter-terminal.png "Import repository")
-
-5. Wait for the `clone` command to finish importing the repo.
+   ![Final folder structure](media/day-02-folder-structure.png)
 
 ## Additional Lab Requirements
 

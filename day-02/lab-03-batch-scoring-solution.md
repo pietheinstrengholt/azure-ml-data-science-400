@@ -42,7 +42,7 @@ Finally, we will also review how to monitor the batch scoring pipeline runs from
 
    ![In the Always use trusted code dialog, Yes, I understand is checked, and the continue button is highlighted.](media/trusted-code-dialog.png "Always use trusted code")
 
-1. From within Jupyter Notebooks interface navigate to `ml-labs/azure-ml-data-science-400/day-02/notebooks`.
+1. From within Jupyter Notebooks interface navigate to `users/odl_user_xxxxxx/day-02/notebooks`.
 
 1. Open `Lab03 - Implementing and monitoring a batch scoring solution`. This is the Python notebook you will step through executing in this lab.
 

@@ -38,7 +38,7 @@ The primary goal of this lab is to learn how to leverage Azure Machine Learning 
 
    ![In the Always use trusted code dialog, Yes, I understand is checked, and the continue button is highlighted.](media/trusted-code-dialog.png "Always use trusted code")
 
-4. From within Jupyter Notebooks interface navigate to `ml-labs/azure-ml-data-science-400/day-01/notebooks`.
+4. From within Jupyter Notebooks interface navigate to `users/odl_user_xxxxxx/day-01/notebooks`.
 
 5. Open `Lab01 - Training and deploying a model in AML`. This is the Python notebook you will step through executing in this lab.
 

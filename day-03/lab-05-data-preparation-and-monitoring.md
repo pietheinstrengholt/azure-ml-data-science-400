@@ -43,7 +43,7 @@ Pioneered by Microsoft Research and their collaborators, Differential Privacy is
 
    ![In the Always use trusted code dialog, Yes, I understand is checked, and the continue button is highlighted.](media/trusted-code-dialog.png "Always use trusted code")
 
-4. From within Jupyter Notebooks interface navigate to `ml-labs/azure-ml-data-science-400/day-03/notebooks`.
+4. From within Jupyter Notebooks interface navigate to ``users/odl_user_xxxxxx/day-03/notebooks``.
 
 ### Task 2: Understand a simple reconstruction attack
 
