@@ -333,3 +333,6 @@ ASALocalRun/
 
 # Jupyter Notebook checkpoints folder
 .ipynb_checkpoints/
+
+.vscode
+.venv
