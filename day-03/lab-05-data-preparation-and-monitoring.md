@@ -12,7 +12,7 @@
 
 ## Lab overview
 
-In this lab you will perform three core Azure Machine Learning data workloads:
+In this lab you will perform two core Azure Machine Learning data workloads:
 
 - Protect privacy with the SmartNoise SDK
 - Monitoring model performance with data drift
