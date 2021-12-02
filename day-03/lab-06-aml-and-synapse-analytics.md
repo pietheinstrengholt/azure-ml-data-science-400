@@ -55,15 +55,19 @@ In this task, the Synapse Workspace Managed Identity will be granted **Contribut
 
     ![The AML Workspace resource screen displays with Access control (IAM) selected from the left menu. The Add menu is expanded with the Add role assignment item chosen.](media/amlworkspace_iam_addroleassignment_menu.png "Add role assignment menu")
 
-4. In the **Add role assignment** blade, populate the form as follows, then select **Save**:
+4. On the **Add role assignment** screen, select **Contributor** from the list, then choose **Next**.
 
-    | Field | Value |
-    |-------|-------|
-    | Role | Select **Contributor** |
-    | Assign access to | Select **User, group, or service principal** |
-    | Select | Enter the name of the Synapse Workspace **synapseworkspace{SUFFIX}**, then select it from the search results |
+    ![The AML resource Add role assignment screen displays with the Role tab selected. The Contributor role is highlighted in the list as well as the Next button.](media/amlworkspace_iam_roleselection.png "IAM role selection")
 
-    ![The Add role assignment blade displays with the above values.](media/amlworkspace_addrole_synapse.png "Add role assignment blade")
+5. On the **Add role assignment** Members tab, select **Managed identity** for the **Assign access to** field. Then, select the **+ Select members** link beneath the **Members** field.
+
+    ![The AML resource role assignment screen displays with the Members tab selected. The Managed identify option is chosen for the Assign access to field and the Select members link is highlighted.](media/amlworkspace_iam_memberstab.png "Add role assignment Members")
+
+6. On the **Select managed identities** blade, choose the **Managed identity** type of Synapse workspace, then select the lab workspace (synapseworkspace{SUFFIX}) from the listing. Choose **Select**.
+
+    ![The Select managed identities blade displays with the Managed identity field set to Synapse workspace. The synapseworkspace{SUFFIX} workspace is selected. The Select button is highlighted.](media/amlworkspace_iam_selectmanagedidentity.png "Select managed identities")
+
+7. Back on the role assignment blade, select **Review + assign**, then **Review + assign** once more.
 
 ### Task 2: Create a linked service in Azure Synapse Analytics to connect with the Azure Machine Learning workspace
 
@@ -83,7 +87,7 @@ The Azure Synapse Analytics managed identity now has Contributor access to the A
 
     ![Synapse Studio displays with the Manage hub selected in the left menu and Linked services selected in the middle menu. The New button is highlighted on the toolbar.](media/synapse_newlinkedservice_menu.png "New Linked service menu")
 
-6. In the New linked service blade, search for and select **Azure Machine Learning**.
+6. In the New linked service blade, search for and select **Azure Machine Learning**. Select **Continue**.
 
    ![The new linked service blade displays with Azure Machine Learning in the search box and Azure Machine Learning selected from the search results.](media/newlinkedservice_search_aml.png "New linked service search")
 
@@ -116,11 +120,13 @@ When executing a Synapse Notebook it will run under the context of the user exec
 
 3. Expand the **+ Add** button and select **Add role assignment**.
 
-4. In the **Add role assignment** blade, select **Storage Blob Data Contributor**.
+4. In the **Add role assignment** screen **Role** tab, select **Storage Blob Data Contributor**, then **Next**.
 
-5. In the **Select**, search for and select your user account, then select **Save**.
+5. In the **Members** tab, select the **+ Select members** link, then search for and choose your user account.
 
-    ![The Add role assignment blade displays with the previous values.](media/addusertoblobstoragecontributor.png "Add Storage Blob Data Contributor")
+    ![The Add role assignment screen displays with the previous values.](media/addusertoblobstoragecontributor.png "Add Storage Blob Data Contributor")
+
+6. Select **Review + assign**, then **Review + assign** once more.
 
 ### Task 2: Ingest dataset into a Spark table
 
@@ -174,17 +180,17 @@ Contoso Hardware would like to streamline the process of identifying a suitable 
 
 1. In Synapse Studio, select the **Data** hub from the left menu.
 
-2. Remaining on the **Workspace** tab, hover over the **Databases** header, then select the ellipsis button that appears to the right of the heading and select the **Refresh** button.
+2. Remaining on the **Workspace** tab, select the **Refresh** button at the top right of the screen.
 
-3. Once refreshed, the **research_development (Spark)** database is visible.
+3. Once refreshed, expand the **Lake database** header.
 
 4. Expand the **research_development** database, and its **Tables** folder to reveal the **compute_module_data** table.
 
-    ![Synapse Studio displays with the Data hub selected from the left menu. The Databases Refresh button is selected. The research_development database is expanded and the compute_module_data table is highlighted.](media/sparkdatabasetableexpansion.png "Spark database and table")
+    ![Synapse Studio displays with the Data hub selected from the left menu. The Databases Refresh button is selected. The research_development database is expanded and the compute_module_data table is highlighted.](media/sparkdatabasetableexpansion.png "Lake database and table")
 
 5. Hover over the **compute_module_data** table, select the ellipsis button and choose **Machine Learning**, then **Train a new model**.
 
-    ![The ellipsis menu is expanded on the compute_module_data Spark table. The Machine Learning item is expanded with the Train a new model item highlighted.](media/sparktable_trainanewmodel.png "Train a new model")
+    ![The ellipsis menu is expanded on the compute_module_data table. The Machine Learning item is expanded with the Train a new model item highlighted.](media/sparktable_trainanewmodel.png "Train a new model")
 
 6. In the Train a new model blade, select **Regression**, then select **Continue**.
 
@@ -299,9 +305,9 @@ Now that the best regression model has been trained and identified, it is now re
 
 The proposed hardware data is loaded into the SQL pool, and the ERP value for all entries is set to 0 and is ready to be predicted by the model.
 
-1. In Synapse Studio, select the **Data** hub from the left menu. Expand the **Databases** header, then the **sqlpool01** database. Expand the **Tables** folder to reveal the `PROPOSED_HARDWARE` table that was populated in the previous task.
+1. In Synapse Studio, select the **Data** hub from the left menu. Expand the **SQL Databases** header, then the **sqlpool01** database. Expand the **Tables** folder to reveal the `PROPOSED_HARDWARE` table that was populated in the previous task.
 
-    ![The Synapse Studio interface displays with the Data hub selected in the left menu. In the Data hub blade, the Databases section is expanded along with the sqlpool01 database. The Tables collection is also expanded revealing the PROPOSED_HARDWARE table.](media/synapsestudio_reveal_proposedhardwaretable.png "SQL pool database tables")
+    ![The Synapse Studio interface displays with the Data hub selected in the left menu. In the Data hub blade, the SQL Databases section is expanded along with the sqlpool01 database. The Tables collection is also expanded revealing the PROPOSED_HARDWARE table.](media/synapsestudio_reveal_proposedhardwaretable.png "SQL pool database tables")
 
 2. Hover over the `PROPOSED_HARDWARE` table and select the ellipsis to reveal the Actions menu. Expand the **Machine Learning** option, and choose **Predict with a model**.
 
@@ -329,10 +335,10 @@ The proposed hardware data is loaded into the SQL pool, and the ERP value for al
 
    ![A portion of the SQL script is shown with the model id highlighted.](media/synapse_scriptmodel.png "SQL script model id")
 
-7. The T-SQL code that is generated will only return the results of the prediction, without actually saving them. Replace the script with the following, be sure to replace the **{MODEL ID GOES HERE}** value. Please note that the **MERGE** statement may show a syntax problem in the user interface, this is not the case and can be safely ignored.
+7. The T-SQL code that is generated will only return the results of the prediction, without actually saving them. Replace the script with the following, be sure to replace the **{MODEL ID GOES HERE}** value. Please note that the **MERGE** statement may show a syntax problem in the user interface, this is not the case and can be safely ignored. Run the script.
 
     ```sql
-    ALTER PROCEDURE [dbo].[predictERP]
+    CREATE PROCEDURE [dbo].[predictERP]
     AS
     BEGIN
         --retrieve the rows where ERP is not populated
@@ -360,7 +366,7 @@ The proposed hardware data is loaded into the SQL pool, and the ERP value for al
 
     ![The SQL script window displays with the aforementioned query.](media/synapsestudio_modelproc.png "SQL query window")
 
-8. Clear the SQL script text, and execute the following to populate the ERP value in the PROPOSED_HARDWARE table. Notice how the ERP column is now a non-zero value.
+8. Clear the SQL script text, and execute the following to populate the ERP value in the PROPOSED_HARDWARE table. Notice how the ERP column now contains non-zero values.
 
     ```sql
     EXEC [dbo].[predictERP]
